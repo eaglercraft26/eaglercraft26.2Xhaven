@@ -97,6 +97,14 @@ public class FoodData {
       return this.foodLevel < 20;
    }
 
+   public float getExhaustionLevel() {
+      return this.exhaustionLevel;
+   }
+
+   public void setExhaustionLevel(final float exhaustion) {
+      this.exhaustionLevel = exhaustion;
+   }
+
    public void addExhaustion(final float amount) {
       this.exhaustionLevel = Math.min(this.exhaustionLevel + amount, 40.0F);
    }

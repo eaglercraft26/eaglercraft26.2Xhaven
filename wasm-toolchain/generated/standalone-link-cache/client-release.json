@@ -1,0 +1,1603 @@
+{
+  "format": 1,
+  "key": "806e6263377cc77676d8eccb635e4bac1af57f319e8c29ed26d89eb0d50835fa",
+  "inputs": {
+    "metadata": {
+      "classpathFile": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/generated/client-program.classpath",
+      "cwd": "/workspaces/eaglercraft26.2Xhaven",
+      "dependencyAnalysis": "precise",
+      "diagnostic": false,
+      "effectiveOptimization": "FULL",
+      "environment": {
+        "DYLD_INSERT_LIBRARIES": null,
+        "DYLD_LIBRARY_PATH": null,
+        "JAVA_HOME": {
+          "sha256": "e6b1c5dcb03839b2acf80fcda6fbf86782f911c56fb63f5743a6b854b43ea6b9"
+        },
+        "JAVA_TOOL_OPTIONS": null,
+        "JDK_JAVAC_OPTIONS": null,
+        "JDK_JAVA_OPTIONS": null,
+        "LANG": {
+          "sha256": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad"
+        },
+        "LC_ALL": null,
+        "LC_CTYPE": null,
+        "LD_LIBRARY_PATH": null,
+        "LD_PRELOAD": null,
+        "NODE_OPTIONS": null,
+        "TZ": null,
+        "_JAVA_OPTIONS": null
+      },
+      "fastDependencyAnalysis": false,
+      "linkerClasses": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/generated/standalone-linker",
+      "linkerHeapMiB": 9728,
+      "linkerLimitMiB": 11776,
+      "operation": "precise-link",
+      "outputDirectory": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/generated/teavm/wasm-gc-standalone",
+      "requestedOptimization": "FULL",
+      "strict": true,
+      "target": {
+        "fileName": "classes.wasm",
+        "mainClass": "net.lax1dude.eaglercraft.v1_8.internal.wasm_gc_teavm.MainClass",
+        "obfuscated": true,
+        "project": "target_teavm_wasm_gc"
+      },
+      "targetName": "client",
+      "toolCommands": [
+        {
+          "command": "/usr/local/share/nvm/versions/node/v24.21.0/bin/node",
+          "executable": "/usr/local/share/nvm/versions/node/v24.21.0/bin/node",
+          "resolved": "/usr/local/share/nvm/versions/node/v24.21.0/bin/node"
+        },
+        {
+          "command": "java",
+          "executable": "/home/codespace/java/current/bin/java",
+          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/java"
+        },
+        {
+          "command": "javac",
+          "executable": "/home/codespace/java/current/bin/javac",
+          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/javac"
+        }
+      ]
+    },
+    "groups": {
+      "toolClasspath": [
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/teavm-eagler-patch/teavm-core-0.13.1-eagler.jar",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/teavm-eagler-patch/teavm-core-0.13.1-eagler.jar",
+          "kind": "file",
+          "bytes": "2957256",
+          "sha256": "e82524a503d2c33cf5401607dc7cfe057a6972e71b8140f9d22b75ea92fbec65"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/teavm-eagler-patch/teavm-jso-impl-0.13.1-eagler.jar",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/teavm-eagler-patch/teavm-jso-impl-0.13.1-eagler.jar",
+          "kind": "file",
+          "bytes": "195343",
+          "sha256": "3d3dab85706d294644b4739fb90719de5041235349a36f6c391d0c4760aad499"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-gradle-plugin/0.13.1/73e1559947be72c69baaa0bffc55aff45c6a911a/teavm-gradle-plugin-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-gradle-plugin/0.13.1/73e1559947be72c69baaa0bffc55aff45c6a911a/teavm-gradle-plugin-0.13.1.jar",
+          "kind": "file",
+          "bytes": "81944",
+          "sha256": "3ef0f7465805f1618a9f3b431258c16b212bb97ac89e41c5a1afecf488316550"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-tooling/0.13.1/350a42a84851087a1896bd6ef4608bff6d07fe7e/teavm-tooling-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-tooling/0.13.1/350a42a84851087a1896bd6ef4608bff6d07fe7e/teavm-tooling-0.13.1.jar",
+          "kind": "file",
+          "bytes": "69009",
+          "sha256": "b382fd7c02b48c133d27ed4d89047659006c3e275ab97acf3f9d14e432d4cb1a"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-core/0.13.1/6e57a36241f4eab12e892a5b3496d01d7cb751d4/teavm-core-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-core/0.13.1/6e57a36241f4eab12e892a5b3496d01d7cb751d4/teavm-core-0.13.1.jar",
+          "kind": "file",
+          "bytes": "2950160",
+          "sha256": "b9fe1b008512c8f11ff3efbd9cf2f0565b4bfa76943a9f23910befc0812f7ebf"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso-impl/0.13.1/e790b4598465b0008078ff2790cceafe280e4654/teavm-jso-impl-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso-impl/0.13.1/e790b4598465b0008078ff2790cceafe280e4654/teavm-jso-impl-0.13.1.jar",
+          "kind": "file",
+          "bytes": "198975",
+          "sha256": "335778b447c10a8029d59a413c37b3b499f1c34ef9e25b08d11f2414a511df0a"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso-apis/0.13.1/4ba2e03d62d0029b669876b4f5aafe4e184998fe/teavm-jso-apis-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso-apis/0.13.1/4ba2e03d62d0029b669876b4f5aafe4e184998fe/teavm-jso-apis-0.13.1.jar",
+          "kind": "file",
+          "bytes": "177707",
+          "sha256": "7a7c211dd03dfbca4445ea5e01b70091226d9e52ce7425d675294ef47a76586b"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-interop/0.13.1/73e85dd04c2b27bae0301add1729d50434fc5ea/teavm-interop-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-interop/0.13.1/73e85dd04c2b27bae0301add1729d50434fc5ea/teavm-interop-0.13.1.jar",
+          "kind": "file",
+          "bytes": "13753",
+          "sha256": "f00f983b986d367799570ab482fee89502915213fe347d361e5bcf1e23a8fa04"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-metaprogramming-api/0.13.1/28677e191c11ede110ad1748a052cd18a25b5d/teavm-metaprogramming-api-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-metaprogramming-api/0.13.1/28677e191c11ede110ad1748a052cd18a25b5d/teavm-metaprogramming-api-0.13.1.jar",
+          "kind": "file",
+          "bytes": "9696",
+          "sha256": "c74a51421913054f434a568f4b13cccc6f832cc5af616837332d7caf4a9eed5b"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-commons/0.13.1/20f0ca058ba290048d2a17e9f5014a2ec90539b0/teavm-relocated-libs-asm-commons-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-commons/0.13.1/20f0ca058ba290048d2a17e9f5014a2ec90539b0/teavm-relocated-libs-asm-commons-0.13.1.jar",
+          "kind": "file",
+          "bytes": "73343",
+          "sha256": "d49685681db5039075f2fde01568f2bb6df14a99ef88d39b29df8e701e12e140"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-util/0.13.1/e0cc59407083aa266185f9c5c4f59d5a04c1d6b7/teavm-relocated-libs-asm-util-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-util/0.13.1/e0cc59407083aa266185f9c5c4f59d5a04c1d6b7/teavm-relocated-libs-asm-util-0.13.1.jar",
+          "kind": "file",
+          "bytes": "94715",
+          "sha256": "a41247ca7f023959712be0e713d3f2f5687b4dfeda6b112b2d976494d52cdc57"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-hppc/0.13.1/d7b3043e84b9202a5f252df6322271a30de3a5a3/teavm-relocated-libs-hppc-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-hppc/0.13.1/d7b3043e84b9202a5f252df6322271a30de3a5a3/teavm-relocated-libs-hppc-0.13.1.jar",
+          "kind": "file",
+          "bytes": "1509391",
+          "sha256": "7b82fedf747e0bf5d7a50acece86a8a684901e469165a3c5621c653128df4cd6"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-rhino/0.13.1/c6b7703825bcae8794359e8f1cbe342816116762/teavm-relocated-libs-rhino-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-rhino/0.13.1/c6b7703825bcae8794359e8f1cbe342816116762/teavm-relocated-libs-rhino-0.13.1.jar",
+          "kind": "file",
+          "bytes": "1426826",
+          "sha256": "49cedc9bfcdd44d30b8bc8d1d46d78fb7f8f2044b8c85c9c3f1ece33e94ee7e9"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso/0.13.1/302ac974df830ff778d80d89293ba675174eb6f5/teavm-jso-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso/0.13.1/302ac974df830ff778d80d89293ba675174eb6f5/teavm-jso-0.13.1.jar",
+          "kind": "file",
+          "bytes": "8391",
+          "sha256": "421b848c79d161c34e9f178d3d37b35e8efaadada487056c3fd3d4d3de1c172c"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-analysis/0.13.1/65ac69292aa28307f73a61c149da3f877ba5426b/teavm-relocated-libs-asm-analysis-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-analysis/0.13.1/65ac69292aa28307f73a61c149da3f877ba5426b/teavm-relocated-libs-asm-analysis-0.13.1.jar",
+          "kind": "file",
+          "bytes": "34800",
+          "sha256": "6bb5ef62ab00d557061d9b04dc4571f711fbe11d339783e55029b37b75d5159c"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-tree/0.13.1/d709372e6eb5f80877b7f505f1f02a916af6b1cb/teavm-relocated-libs-asm-tree-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-tree/0.13.1/d709372e6eb5f80877b7f505f1f02a916af6b1cb/teavm-relocated-libs-asm-tree-0.13.1.jar",
+          "kind": "file",
+          "bytes": "51412",
+          "sha256": "6b475fd62b8ddedfa0808c0c412c311f000a80a13123b6ba07f5da531164fd5b"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm/0.13.1/f746b39e4d2db6e5dac979cba0b630fc358770a1/teavm-relocated-libs-asm-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm/0.13.1/f746b39e4d2db6e5dac979cba0b630fc358770a1/teavm-relocated-libs-asm-0.13.1.jar",
+          "kind": "file",
+          "bytes": "126383",
+          "sha256": "400496e463dddd878fed2b9b25a66deca2126f71bb68e41f82244b4315006018"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-wasm-gc-deobfuscator/0.13.1/a051bbecce343f66a74739b0260abc03956ae83/teavm-wasm-gc-deobfuscator-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-wasm-gc-deobfuscator/0.13.1/a051bbecce343f66a74739b0260abc03956ae83/teavm-wasm-gc-deobfuscator-0.13.1.jar",
+          "kind": "file",
+          "bytes": "18444",
+          "sha256": "0e89d9a53d8c891cb781b533b259f183bb3e0df1559b26e93b69df3429cab86a"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-commons-io/0.13.1/8aec42811000fabc73b2d097483a40b59248e299/teavm-relocated-libs-commons-io-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-commons-io/0.13.1/8aec42811000fabc73b2d097483a40b59248e299/teavm-relocated-libs-commons-io-0.13.1.jar",
+          "kind": "file",
+          "bytes": "563696",
+          "sha256": "5e1a666948a40dada1d3fbce41503bad6ce86035662bf131c8df227b30859a79"
+        }
+      ],
+      "programClasspath": [
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/teavm-eagler-patch/uri-classlib-override.jar",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/teavm-eagler-patch/uri-classlib-override.jar",
+          "kind": "file",
+          "bytes": "10473",
+          "sha256": "46e9533a4595f51941c45da254f2a8ff944c9d3b0831ec946f9d63da693d7832"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/teavm-eagler-patch/fiber-override.jar",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/teavm-eagler-patch/fiber-override.jar",
+          "kind": "file",
+          "bytes": "8603",
+          "sha256": "0ed36fcde70d9c8bdbed60882ef0058088033447e548742d37712154748171ef"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/teavm-eagler-patch/classlib-override.jar",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/teavm-eagler-patch/classlib-override.jar",
+          "kind": "file",
+          "bytes": "38716",
+          "sha256": "a39f6e982ad7839acf1dbe7679eb918b12ec0f3d3b6ad009f1c0d1503b9b48d2"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/platform-teavm/build/libs/platform-teavm.jar",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/platform-teavm/build/libs/platform-teavm.jar",
+          "kind": "file",
+          "bytes": "696785",
+          "sha256": "40f9fce0d85a2589aa720dec6c761e73e345c825fe672a245de07989ebc1c15e"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/game/build/libs/game.jar",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/game/build/libs/game.jar",
+          "kind": "file",
+          "bytes": "54543984",
+          "sha256": "aa34ea521c9ac3f6498d29115afeb2c9d431191f4c3b3c5d195e00c603f3ad16"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/platform/build/libs/platform.jar",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/platform/build/libs/platform.jar",
+          "kind": "file",
+          "bytes": "243996",
+          "sha256": "ba9b6108210fd5f31c3a3ae0e21f6aaafb1ab7af9eb781db8ac7745ca1c8f7a2"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/teavm-compat/build/libs/teavm-compat.jar",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/teavm-compat/build/libs/teavm-compat.jar",
+          "kind": "file",
+          "bytes": "380781",
+          "sha256": "25c57ed07931e1c6a61d20a1af9b873661bb8e3a33b7758886c57536e41a630a"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-classlib/0.13.1/a1dfb33d28bee31e22841546ae776e7f731dfbc7/teavm-classlib-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-classlib/0.13.1/a1dfb33d28bee31e22841546ae776e7f731dfbc7/teavm-classlib-0.13.1.jar",
+          "kind": "file",
+          "bytes": "17768641",
+          "sha256": "a250f7baf877767af72634cd3f19d30f2a6b8a3fb16bd3931b99fde1b17cd12d"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-platform/0.13.1/9396b0ee53251bb2e6698767515a636bd1e867c5/teavm-platform-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-platform/0.13.1/9396b0ee53251bb2e6698767515a636bd1e867c5/teavm-platform-0.13.1.jar",
+          "kind": "file",
+          "bytes": "131492",
+          "sha256": "ca725f27d0be52d1ddc95e11b63bad8cfe0f66dac9977a46d4089c6282ee1f8e"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso-impl/0.13.1/e790b4598465b0008078ff2790cceafe280e4654/teavm-jso-impl-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso-impl/0.13.1/e790b4598465b0008078ff2790cceafe280e4654/teavm-jso-impl-0.13.1.jar",
+          "kind": "file",
+          "bytes": "198975",
+          "sha256": "335778b447c10a8029d59a413c37b3b499f1c34ef9e25b08d11f2414a511df0a"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso-apis/0.13.1/4ba2e03d62d0029b669876b4f5aafe4e184998fe/teavm-jso-apis-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso-apis/0.13.1/4ba2e03d62d0029b669876b4f5aafe4e184998fe/teavm-jso-apis-0.13.1.jar",
+          "kind": "file",
+          "bytes": "177707",
+          "sha256": "7a7c211dd03dfbca4445ea5e01b70091226d9e52ce7425d675294ef47a76586b"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso/0.13.1/302ac974df830ff778d80d89293ba675174eb6f5/teavm-jso-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-jso/0.13.1/302ac974df830ff778d80d89293ba675174eb6f5/teavm-jso-0.13.1.jar",
+          "kind": "file",
+          "bytes": "8391",
+          "sha256": "421b848c79d161c34e9f178d3d37b35e8efaadada487056c3fd3d4d3de1c172c"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-core/0.13.1/6e57a36241f4eab12e892a5b3496d01d7cb751d4/teavm-core-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-core/0.13.1/6e57a36241f4eab12e892a5b3496d01d7cb751d4/teavm-core-0.13.1.jar",
+          "kind": "file",
+          "bytes": "2950160",
+          "sha256": "b9fe1b008512c8f11ff3efbd9cf2f0565b4bfa76943a9f23910befc0812f7ebf"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-interop/0.13.1/73e85dd04c2b27bae0301add1729d50434fc5ea/teavm-interop-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-interop/0.13.1/73e85dd04c2b27bae0301add1729d50434fc5ea/teavm-interop-0.13.1.jar",
+          "kind": "file",
+          "bytes": "13753",
+          "sha256": "f00f983b986d367799570ab482fee89502915213fe347d361e5bcf1e23a8fa04"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/at.yawk.lz4/lz4-java/1.10.1/f541d7f910fe3d76f38f799c507c48cc81b12ecb/lz4-java-1.10.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/at.yawk.lz4/lz4-java/1.10.1/f541d7f910fe3d76f38f799c507c48cc81b12ecb/lz4-java-1.10.1.jar",
+          "kind": "file",
+          "bytes": "910232",
+          "sha256": "a58a84c4271e50df4c96ed916ccb7e48a869f8ed9cdcda1ad5d3d4c33b0214a3"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/authlib/9.0.75/d61056a234d5e4b272e09d59b0713f80d6c0b6af/authlib-9.0.75.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/authlib/9.0.75/d61056a234d5e4b272e09d59b0713f80d6c0b6af/authlib-9.0.75.jar",
+          "kind": "file",
+          "bytes": "145285",
+          "sha256": "1f77e70240548b9cd233da0e12938bbbe5597ac9e94f6c6b07577faf1461a951"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/datafixerupper/10.0.21/b6b2ae770c02e0c1eb90f9985b151e9085a38d0b/datafixerupper-10.0.21.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/datafixerupper/10.0.21/b6b2ae770c02e0c1eb90f9985b151e9085a38d0b/datafixerupper-10.0.21.jar",
+          "kind": "file",
+          "bytes": "753612",
+          "sha256": "3547cb1da8993fb7ebd42494d0e78997d2cfbe90c421f5efd022863e6909941e"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.14.0/efc0e34ede4e3204eaefb84a00e55e8c86634382/gson-2.14.0.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.14.0/efc0e34ede4e3204eaefb84a00e55e8c86634382/gson-2.14.0.jar",
+          "kind": "file",
+          "bytes": "313604",
+          "sha256": "2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/patchy/2.2.10/da05971b07cbb379d002cf7eaec6a2048211fefc/patchy-2.2.10.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/patchy/2.2.10/da05971b07cbb379d002cf7eaec6a2048211fefc/patchy-2.2.10.jar",
+          "kind": "file",
+          "bytes": "4439",
+          "sha256": "16d70e7968b45caffc81576268eb000f473fb60bf257182d3447dea8ec919d5a"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/33.6.0-jre/c376b13067cc99a5774403530953f7b05a91e218/guava-33.6.0-jre.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/33.6.0-jre/c376b13067cc99a5774403530953f7b05a91e218/guava-33.6.0-jre.jar",
+          "kind": "file",
+          "bytes": "3064793",
+          "sha256": "dc573e1fca4fd5454f4a5fd3d7da2df03002876a4175bafc14a95980dd7713b3"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.3/aeaffd00d57023a2c947393ed251f0354f0985fc/failureaccess-1.0.3.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.guava/failureaccess/1.0.3/aeaffd00d57023a2c947393ed251f0354f0985fc/failureaccess-1.0.3.jar",
+          "kind": "file",
+          "bytes": "10763",
+          "sha256": "cbfc3906b19b8f55dd7cfd6dfe0aa4532e834250d7f080bd8d211a3e246b59cb"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/blocklist/1.0.10/5c685c5ffa94c4cd39496c7184c1d122e515ecef/blocklist-1.0.10.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/blocklist/1.0.10/5c685c5ffa94c4cd39496c7184c1d122e515ecef/blocklist-1.0.10.jar",
+          "kind": "file",
+          "bytes": "964",
+          "sha256": "830bfd639c8db49236bbd8e45d3a2b8c96c56ff654a10118654958a6235d4c44"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/brigadier/1.3.10/d15b53a14cf20fdcaa98f731af5dda654452c010/brigadier-1.3.10.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/brigadier/1.3.10/d15b53a14cf20fdcaa98f731af5dda654452c010/brigadier-1.3.10.jar",
+          "kind": "file",
+          "bytes": "80082",
+          "sha256": "c8ee4136e474ac7723ca2b432ec8d1a2bc88ef7d1ec57c314ba9e33cdc83dd75"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/jtracy/1.0.37/a3fb649b2e2b2288d2978f0b0bc3d83f62809d1e/jtracy-1.0.37.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/jtracy/1.0.37/a3fb649b2e2b2288d2978f0b0bc3d83f62809d1e/jtracy-1.0.37.jar",
+          "kind": "file",
+          "bytes": "12876",
+          "sha256": "8bb68d0b65e8eceb92de2bd1d9e1443a8c9a9dd1b5818a5e54870b0f8253672a"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/jtracy/1.0.37/e1b4395227af41195da9e2ead13c48ee0b7d31cd/jtracy-1.0.37-natives-linux.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/jtracy/1.0.37/e1b4395227af41195da9e2ead13c48ee0b7d31cd/jtracy-1.0.37-natives-linux.jar",
+          "kind": "file",
+          "bytes": "193951",
+          "sha256": "4b22779ea24eecd3e3cf6eb06030ca85b833dd8b7a169bf3b88afd6c1676cc68"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.28.0/e482f2c7a88dac3c497e96aa420b6a769f59c8d7/commons-compress-1.28.0.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-compress/1.28.0/e482f2c7a88dac3c497e96aa420b6a769f59c8d7/commons-compress-1.28.0.jar",
+          "kind": "file",
+          "bytes": "1117221",
+          "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.22.0/6b3eb4beb7058c2a638f5f17bcb388649fd339dd/commons-codec-1.22.0.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.22.0/6b3eb4beb7058c2a638f5f17bcb388649fd339dd/commons-codec-1.22.0.jar",
+          "kind": "file",
+          "bytes": "420480",
+          "sha256": "d164fe79f262c32d9b18a0b5b2d317d1c27653d5e98fd2b998c24bf901c72ce4"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.20.0/36f3474daec2849c149e877614e7f979b2082cd2/commons-io-2.20.0.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/commons-io/commons-io/2.20.0/36f3474daec2849c149e877614e7f979b2082cd2/commons-io-2.20.0.jar",
+          "kind": "file",
+          "bytes": "563971",
+          "sha256": "df90bba0fe3cb586b7f164e78fe8f8f4da3f2dd5c27fa645f888100ccc25dd72"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http/4.2.15.Final/e611826aa054371bb9a17f27bdb05755a4cac5f0/netty-codec-http-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-http/4.2.15.Final/e611826aa054371bb9a17f27bdb05755a4cac5f0/netty-codec-http-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "674986",
+          "sha256": "76ae57e87af37b3c4107140f50b9244b1456163a6a225510838f7c5a4458ec22"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-compression/4.2.15.Final/89fc4a20b7ae6af974304b1695405e62c4f9b16d/netty-codec-compression-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-compression/4.2.15.Final/89fc4a20b7ae6af974304b1695405e62c4f9b16d/netty-codec-compression-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "183091",
+          "sha256": "4adaa5cdd4d2e9b50b23e4c3eff42e73de6eb40848718b3aa84cd5b454da6ce8"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.2.15.Final/d5344afd1148e3b9927a74be019605ebb0937a93/netty-handler-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-handler/4.2.15.Final/d5344afd1148e3b9927a74be019605ebb0937a93/netty-handler-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "586442",
+          "sha256": "99b59e4bea72220d2aed52df8baf37d97431b06ade0b135226cdf73168975eab"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-base/4.2.15.Final/e97149fdd5fb04858efa90e314651c8d700dc68b/netty-codec-base-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-codec-base/4.2.15.Final/e97149fdd5fb04858efa90e314651c8d700dc68b/netty-codec-base-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "152914",
+          "sha256": "2c6d39d7270628b8cfc3166fbd7a93d595958e59c461bc32ddb383c8c91bf811"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport/4.2.15.Final/a000c3a6196ee40207b73ac619dcb339409dd62f/netty-transport-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport/4.2.15.Final/a000c3a6196ee40207b73ac619dcb339409dd62f/netty-transport-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "549606",
+          "sha256": "9fb671e96651066cf1a28dad3f1382c7c99df5b8326d4a214d9a375b311f8dc1"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-buffer/4.2.15.Final/2beb620803bf871cda2dd5d46b8f831e8015dd34/netty-buffer-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-buffer/4.2.15.Final/2beb620803bf871cda2dd5d46b8f831e8015dd34/netty-buffer-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "371912",
+          "sha256": "1361fd9c9ba85b9831cf54a1b2e45ddc3ce34a768931726c099d3f5ef0efe4a3"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-resolver/4.2.15.Final/b961a16d379b508b473e064ba06842bba280f4e3/netty-resolver-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-resolver/4.2.15.Final/b961a16d379b508b473e064ba06842bba280f4e3/netty-resolver-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "32977",
+          "sha256": "24318497f2a3a645964fed418f48879ba11365cab8e1f8d66c47fa7da15ef19a"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-common/4.2.15.Final/7222492c1af9c2d4d78d521eea340a619e242fda/netty-common-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-common/4.2.15.Final/7222492c1af9c2d4d78d521eea340a619e242fda/netty-common-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "818260",
+          "sha256": "78206aa7f6d197caa926291408c01889b6b910ca0f74017d3fcbdaccf9562959"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/8.5.18/a6cff377eecc19c2037bf31568a6d7106b50ba1f/fastutil-8.5.18.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/8.5.18/a6cff377eecc19c2037bf31568a6d7106b50ba1f/fastutil-8.5.18.jar",
+          "kind": "file",
+          "bytes": "23965563",
+          "sha256": "9094ae67d01d0ad246f886f11ad557fc2e79c72cbf3feed83e1512a8ae90a74a"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/5.0.4/4fdac2fbe92dfad86aa6e9301736f6b4342a3f5c/jopt-simple-5.0.4.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/net.sf.jopt-simple/jopt-simple/5.0.4/4fdac2fbe92dfad86aa6e9301736f6b4342a3f5c/jopt-simple-5.0.4.jar",
+          "kind": "file",
+          "bytes": "78146",
+          "sha256": "df26cc58f235f477db07f753ba5a3ab243ebe5789d9f89ecf68dd62ea9a66c28"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.20.0/65897b3e5731220962e659e001904af3c3cbeba9/commons-lang3-3.20.0.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.20.0/65897b3e5731220962e659e001904af3c3cbeba9/commons-lang3-3.20.0.jar",
+          "kind": "file",
+          "bytes": "713862",
+          "sha256": "69e5c9fa35da7a51a5fd2099dfe56a2d8d32cf233e2f6d770e796146440263f4"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.jcraft/jorbis/0.0.17/8872d22b293e8f5d7d56ff92be966e6dc28ebdc6/jorbis-0.0.17.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.jcraft/jorbis/0.0.17/8872d22b293e8f5d7d56ff92be966e6dc28ebdc6/jorbis-0.0.17.jar",
+          "kind": "file",
+          "bytes": "99701",
+          "sha256": "e067f29a3701426b67ed973036949c6e58ca5bb53eef7240b2e71e286d252a9e"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.joml/joml/1.10.8/fc0a71dad90a2cf41d82a76156a0e700af8e4f8d/joml-1.10.8.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.joml/joml/1.10.8/fc0a71dad90a2cf41d82a76156a0e700af8e4f8d/joml-1.10.8.jar",
+          "kind": "file",
+          "bytes": "778846",
+          "sha256": "bf19510145178df82cd3bd37edd514c13f411531ec5545299fd3abcbc98fe7c2"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.0/7425a601c1c7ec76645a78d22b8c6a627edee507/jspecify-1.0.0.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.0/7425a601c1c7ec76645a78d22b8c6a627edee507/jspecify-1.0.0.jar",
+          "kind": "file",
+          "bytes": "3819",
+          "sha256": "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-metaprogramming-impl/0.13.1/4c2d959a7662dadcd5c544c228f98a839ea19c4c/teavm-metaprogramming-impl-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-metaprogramming-impl/0.13.1/4c2d959a7662dadcd5c544c228f98a839ea19c4c/teavm-metaprogramming-impl-0.13.1.jar",
+          "kind": "file",
+          "bytes": "112951",
+          "sha256": "56f5536c8287288d823af3ab80874eab2968cda6acbbe3f33c5212c88a4eb890"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.jcraft/jzlib/1.1.3/c01428efa717624f7aabf4df319939dda9646b2d/jzlib-1.1.3.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.jcraft/jzlib/1.1.3/c01428efa717624f7aabf4df319939dda9646b2d/jzlib-1.1.3.jar",
+          "kind": "file",
+          "bytes": "71976",
+          "sha256": "89b1360f407381bf61fde411019d8cbd009ebb10cff715f3669017a031027560"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.12.2/78e18a7b4180e911dafba0a412adfa82c1e3d14b/joda-time-2.12.2.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.12.2/78e18a7b4180e911dafba0a412adfa82c1e3d14b/joda-time-2.12.2.jar",
+          "kind": "file",
+          "bytes": "636782",
+          "sha256": "8d4d807adc8e92a83913d9ccd61e634b4907c78d88f3016d06b3b3d2b4795a02"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.48.0/bbe30942a31d1778c74cb272321267eca82dc708/error_prone_annotations-2.48.0.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.errorprone/error_prone_annotations/2.48.0/bbe30942a31d1778c74cb272321267eca82dc708/error_prone_annotations-2.48.0.jar",
+          "kind": "file",
+          "bytes": "20255",
+          "sha256": "b49c5c958316ed67a09c699dda9aa749caf434d51d863dea599ef36a49b9c855"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/b421526c5f297295adef1c886e5246c39d4ac629/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/b421526c5f297295adef1c886e5246c39d4ac629/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
+          "kind": "file",
+          "bytes": "2199",
+          "sha256": "b372a037d4230aa57fbeffdef30fd6123f9c0c2db85d0aced00c91b974f33f99"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/3.1/a892ca9507839bbdb900d64310ac98256cab992f/j2objc-annotations-3.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.j2objc/j2objc-annotations/3.1/a892ca9507839bbdb900d64310ac98256cab992f/j2objc-annotations-3.1.jar",
+          "kind": "file",
+          "bytes": "16762",
+          "sha256": "84d3a150518485f8140ea99b8a985656749629f6433c92b80c75b36aba3b099b"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.2/25ea2e8b0c338a877313bd4672d3fe056ea78f0d/jsr305-3.0.2.jar",
+          "kind": "file",
+          "bytes": "19936",
+          "sha256": "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-metaprogramming-api/0.13.1/28677e191c11ede110ad1748a052cd18a25b5d/teavm-metaprogramming-api-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-metaprogramming-api/0.13.1/28677e191c11ede110ad1748a052cd18a25b5d/teavm-metaprogramming-api-0.13.1.jar",
+          "kind": "file",
+          "bytes": "9696",
+          "sha256": "c74a51421913054f434a568f4b13cccc6f832cc5af616837332d7caf4a9eed5b"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-commons/0.13.1/20f0ca058ba290048d2a17e9f5014a2ec90539b0/teavm-relocated-libs-asm-commons-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-commons/0.13.1/20f0ca058ba290048d2a17e9f5014a2ec90539b0/teavm-relocated-libs-asm-commons-0.13.1.jar",
+          "kind": "file",
+          "bytes": "73343",
+          "sha256": "d49685681db5039075f2fde01568f2bb6df14a99ef88d39b29df8e701e12e140"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-util/0.13.1/e0cc59407083aa266185f9c5c4f59d5a04c1d6b7/teavm-relocated-libs-asm-util-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-util/0.13.1/e0cc59407083aa266185f9c5c4f59d5a04c1d6b7/teavm-relocated-libs-asm-util-0.13.1.jar",
+          "kind": "file",
+          "bytes": "94715",
+          "sha256": "a41247ca7f023959712be0e713d3f2f5687b4dfeda6b112b2d976494d52cdc57"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-hppc/0.13.1/d7b3043e84b9202a5f252df6322271a30de3a5a3/teavm-relocated-libs-hppc-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-hppc/0.13.1/d7b3043e84b9202a5f252df6322271a30de3a5a3/teavm-relocated-libs-hppc-0.13.1.jar",
+          "kind": "file",
+          "bytes": "1509391",
+          "sha256": "7b82fedf747e0bf5d7a50acece86a8a684901e469165a3c5621c653128df4cd6"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-rhino/0.13.1/c6b7703825bcae8794359e8f1cbe342816116762/teavm-relocated-libs-rhino-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-rhino/0.13.1/c6b7703825bcae8794359e8f1cbe342816116762/teavm-relocated-libs-rhino-0.13.1.jar",
+          "kind": "file",
+          "bytes": "1426826",
+          "sha256": "49cedc9bfcdd44d30b8bc8d1d46d78fb7f8f2044b8c85c9c3f1ece33e94ee7e9"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-commons-io/0.13.1/8aec42811000fabc73b2d097483a40b59248e299/teavm-relocated-libs-commons-io-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-commons-io/0.13.1/8aec42811000fabc73b2d097483a40b59248e299/teavm-relocated-libs-commons-io-0.13.1.jar",
+          "kind": "file",
+          "bytes": "563696",
+          "sha256": "5e1a666948a40dada1d3fbce41503bad6ce86035662bf131c8df227b30859a79"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-analysis/0.13.1/65ac69292aa28307f73a61c149da3f877ba5426b/teavm-relocated-libs-asm-analysis-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-analysis/0.13.1/65ac69292aa28307f73a61c149da3f877ba5426b/teavm-relocated-libs-asm-analysis-0.13.1.jar",
+          "kind": "file",
+          "bytes": "34800",
+          "sha256": "6bb5ef62ab00d557061d9b04dc4571f711fbe11d339783e55029b37b75d5159c"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-tree/0.13.1/d709372e6eb5f80877b7f505f1f02a916af6b1cb/teavm-relocated-libs-asm-tree-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm-tree/0.13.1/d709372e6eb5f80877b7f505f1f02a916af6b1cb/teavm-relocated-libs-asm-tree-0.13.1.jar",
+          "kind": "file",
+          "bytes": "51412",
+          "sha256": "6b475fd62b8ddedfa0808c0c412c311f000a80a13123b6ba07f5da531164fd5b"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm/0.13.1/f746b39e4d2db6e5dac979cba0b630fc358770a1/teavm-relocated-libs-asm-0.13.1.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/org.teavm/teavm-relocated-libs-asm/0.13.1/f746b39e4d2db6e5dac979cba0b630fc358770a1/teavm-relocated-libs-asm-0.13.1.jar",
+          "kind": "file",
+          "bytes": "126383",
+          "sha256": "400496e463dddd878fed2b9b25a66deca2126f71bb68e41f82244b4315006018"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main",
+          "kind": "directory",
+          "entries": [
+            {
+              "path": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net",
+              "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net",
+              "kind": "directory",
+              "entries": [
+                {
+                  "path": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude",
+                  "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude",
+                  "kind": "directory",
+                  "entries": [
+                    {
+                      "path": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude/eaglercraft",
+                      "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude/eaglercraft",
+                      "kind": "directory",
+                      "entries": [
+                        {
+                          "path": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude/eaglercraft/v1_8",
+                          "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude/eaglercraft/v1_8",
+                          "kind": "directory",
+                          "entries": [
+                            {
+                              "path": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude/eaglercraft/v1_8/internal",
+                              "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude/eaglercraft/v1_8/internal",
+                              "kind": "directory",
+                              "entries": [
+                                {
+                                  "path": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude/eaglercraft/v1_8/internal/wasm_gc_teavm",
+                                  "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude/eaglercraft/v1_8/internal/wasm_gc_teavm",
+                                  "kind": "directory",
+                                  "entries": [
+                                    {
+                                      "path": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude/eaglercraft/v1_8/internal/wasm_gc_teavm/MainClass.class",
+                                      "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/classes/java/main/net/lax1dude/eaglercraft/v1_8/internal/wasm_gc_teavm/MainClass.class",
+                                      "kind": "file",
+                                      "bytes": "979",
+                                      "sha256": "ebacd790be7f4f46d0fc40cb40e10089aef5e8f427bbf77ec3e3554d70fc7365"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-classes-epoll/4.2.15.Final/44bafba9c9993800e955b365bba4981326f3f3b1/netty-transport-classes-epoll-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-classes-epoll/4.2.15.Final/44bafba9c9993800e955b365bba4981326f3f3b1/netty-transport-classes-epoll-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "159908",
+          "sha256": "be509407fd71a4b83378567c613420db544d659bb522df7b253a1dbe8ca297fe"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-classes-kqueue/4.2.15.Final/f248656bb907607c5a41c7b61fd918a97db79250/netty-transport-classes-kqueue-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-classes-kqueue/4.2.15.Final/f248656bb907607c5a41c7b61fd918a97db79250/netty-transport-classes-kqueue-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "116801",
+          "sha256": "2a15e2213a1fe49e73b4bb39bc746e7196dba8c1b182bc0d21a719a4d1be2c00"
+        },
+        {
+          "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-native-unix-common/4.2.15.Final/efb6943b4de9e0226a5ac35330f232605424af02/netty-transport-native-unix-common-4.2.15.Final.jar",
+          "resolved": "/home/codespace/.gradle/caches/modules-2/files-2.1/io.netty/netty-transport-native-unix-common/4.2.15.Final/efb6943b4de9e0226a5ac35330f232605424af02/netty-transport-native-unix-common-4.2.15.Final.jar",
+          "kind": "file",
+          "bytes": "46876",
+          "sha256": "b9ea9fc5ad5eba04e99afdff75b2eb97b5ddfb2ad772e2f2ef5d8f277f3cbd76"
+        }
+      ],
+      "runtime": [
+        {
+          "path": "/usr/local/share/nvm/versions/node/v24.21.0/bin/node",
+          "resolved": "/usr/local/share/nvm/versions/node/v24.21.0/bin/node",
+          "kind": "file",
+          "bytes": "126595440",
+          "sha256": "7fde7b8afa198da66257f42ee2001d874c7355631e6d1579a5fb5ef1f246df4c"
+        },
+        {
+          "path": "/home/codespace/java/current/bin/java",
+          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/java",
+          "kind": "file",
+          "bytes": "12328",
+          "sha256": "5cd1b5ceb7d4ab2f8ec0f93c1331fd1048348cf3a085b56a37ff10fce0767b5c"
+        },
+        {
+          "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/release",
+          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/release",
+          "kind": "file",
+          "bytes": "1252",
+          "sha256": "214fe8729a0548920a4d1bd65c9e9cf4a0b6533019c6ea6a66c67ce395d92ef5"
+        },
+        {
+          "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin",
+          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin",
+          "kind": "directory",
+          "entries": [
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jar",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jar",
+              "kind": "file",
+              "bytes": "12384",
+              "sha256": "17f7ca3c4682d5cb070f61fe9e7b43d01c63e3030f840aea0fc19ed6566f09f6"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jarsigner",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jarsigner",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "61b0f77cf7b7d19f9cf25b434b4a5248805e02f4b31b056ded1df40a7ef37769"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/java",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/java",
+              "kind": "file",
+              "bytes": "12328",
+              "sha256": "5cd1b5ceb7d4ab2f8ec0f93c1331fd1048348cf3a085b56a37ff10fce0767b5c"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/javac",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/javac",
+              "kind": "file",
+              "bytes": "12416",
+              "sha256": "24eccf1f812ddad4d6805d4ff9ac5f20adffa0b71b51596447e2898bc32e54d5"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/javadoc",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/javadoc",
+              "kind": "file",
+              "bytes": "12424",
+              "sha256": "597f0de7d0234ba575f031821f58c9e62aab7c541c99f58f59995a089d1a4397"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/javap",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/javap",
+              "kind": "file",
+              "bytes": "12384",
+              "sha256": "ffee4c297b9b1bd8ce41ff1d4bd7ee60853675060cc9706842af9430cdab97e5"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jcmd",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jcmd",
+              "kind": "file",
+              "bytes": "12384",
+              "sha256": "90015aab6014848fef73ed21b95c476e607ee4e4a53f4131758194637db647ba"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jconsole",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jconsole",
+              "kind": "file",
+              "bytes": "12456",
+              "sha256": "80f5aa4a4e2e0b0fca40836714b4dc4bd92b2bf7a0e7722db491ffa612d65434"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jdb",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jdb",
+              "kind": "file",
+              "bytes": "12384",
+              "sha256": "0e7516601705b52fbf6aff97b274b1ba1c045b0c48c04e34dfd9c60526600a68"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jdeprscan",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jdeprscan",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "ed363c3d6eadba99b080c6b547485ea92eff6679b6f248d135ef39fc4fc8d280"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jdeps",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jdeps",
+              "kind": "file",
+              "bytes": "12384",
+              "sha256": "b322e55608208286af0b9c39a89f15c3c978c468740d5049502677bbdc9bf3e2"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jfr",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jfr",
+              "kind": "file",
+              "bytes": "12384",
+              "sha256": "5fafd21b8ad761acf445861023c9f23d724719707a73c7ae2d0a00c9b2015c7f"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jhsdb",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jhsdb",
+              "kind": "file",
+              "bytes": "12384",
+              "sha256": "0e8b16ac06c46333dba763a8163c358eafce5fe6daaa5646d583605da604f76f"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jimage",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jimage",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "af25752846c6a765c0724227413521d7b28b395714d968f2bce575c66d6d7ed5"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jinfo",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jinfo",
+              "kind": "file",
+              "bytes": "12416",
+              "sha256": "cf56caf32441d3e7c509b53eacdfb7be11ddc60ab5d466b53bb49d914d414e03"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jlink",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jlink",
+              "kind": "file",
+              "bytes": "12416",
+              "sha256": "a52ce8f8756318dc3163908fb7b54f093051ae45beef2f0b1ff17553c5209ad1"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jmap",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jmap",
+              "kind": "file",
+              "bytes": "12416",
+              "sha256": "173173b777cb0febc3f7764182b00b40547e15024870f3fe7108d9645cde53db"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jmod",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jmod",
+              "kind": "file",
+              "bytes": "12384",
+              "sha256": "ee6bef00031bff54d80ade8863ccbccae095880115857f8de8aec3e8de70ecd4"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jnativescan",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jnativescan",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "0f35359467b95ef0bcc8a76ee331de3b6cf01aaa689577143944b2c204cebfa5"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jpackage",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jpackage",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "ebbe8a9d4593ffea7cc21f84e4fb1beba7a9071f72279c8c2c9735058cdf443c"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jps",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jps",
+              "kind": "file",
+              "bytes": "12384",
+              "sha256": "c7b8db59c31ebf7333ba9b84c32e26f319ff85b6ce45c33a27c27bcd4c6a7412"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jrunscript",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jrunscript",
+              "kind": "file",
+              "bytes": "12424",
+              "sha256": "9bf17412579a0c0005c50cf70700f231fff420c51bd27dec9188c8fa327646ee"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jshell",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jshell",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "a34241ef24293d379563db04b8b656b005ffb03e9903fa2192861b569bad859b"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jstack",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jstack",
+              "kind": "file",
+              "bytes": "12424",
+              "sha256": "e1ba50b1c541480bf4795bab49a33147a934c9f3b513b05288220f15245d52f6"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jstat",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jstat",
+              "kind": "file",
+              "bytes": "12384",
+              "sha256": "cf14998afb1ec7c1a60b3becec1576ad8f903f9e35cd43e4d5c2251eaaa05d69"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jstatd",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jstatd",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "2298953b0bb45386ce8c0924c4383a20c5b844940d2783f708233b2509e01b27"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jwebserver",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/jwebserver",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "d6ecf982dfa828cf06a99b97bafebdc011c022dc4d549edf0f21de3dcdcbfb86"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/keytool",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/keytool",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "ab8a894f1b2b65b40759385807838e15dcf5a1a580c99cf910cec033f2252363"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/rmiregistry",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/rmiregistry",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "b83293af63b1c43fd23c76647a3b62396c31be31d95777a09d74cb143c6bd212"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/serialver",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/serialver",
+              "kind": "file",
+              "bytes": "12392",
+              "sha256": "a347f20bf5eb1fcdf625fbe487aef48a7be008f601056545571dc5cae29b763a"
+            }
+          ]
+        },
+        {
+          "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib",
+          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib",
+          "kind": "directory",
+          "entries": [
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/classlist",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/classlist",
+              "kind": "file",
+              "bytes": "84744",
+              "sha256": "a8450498392604748bdc9117201c65b62ba39d675df8c3260e5e15e21fa245c7"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/ct.sym",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/ct.sym",
+              "kind": "file",
+              "bytes": "10871963",
+              "sha256": "227ac5e5305449ca961f5b7e78cfb144040b9e7e3a68e7831ed9d40341f22831"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jexec",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jexec",
+              "kind": "file",
+              "bytes": "12488",
+              "sha256": "136c6aa0d4c9d88c1e692a4e4c6b77538e64c9c45a3bb3239680fd81b05b9ebe"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jfr",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jfr",
+              "kind": "directory",
+              "entries": [
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jfr/default.jfc",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jfr/default.jfc",
+                  "kind": "file",
+                  "bytes": "40505",
+                  "sha256": "26f2d7bf2f8473b3849f9480629eee695edf59fd667da838890a22919237718a"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jfr/profile.jfc",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jfr/profile.jfc",
+                  "kind": "file",
+                  "bytes": "40387",
+                  "sha256": "3e2c847608b1e7d182337f56bbf75b6a026ba4e9634b398bd92aec865e9ea8a7"
+                }
+              ]
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jrt-fs.jar",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jrt-fs.jar",
+              "kind": "file",
+              "bytes": "109847",
+              "sha256": "72a887e8c4bb90d0e33aa91f496f13d0669eb2fa76d9d1d454179c8d87fbfb75"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jspawnhelper",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jspawnhelper",
+              "kind": "file",
+              "bytes": "17576",
+              "sha256": "cdb7903865728ec743d4f147634eaf06b6dfa5d9d0ca294ee59cd7bf5c2843a7"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jvm.cfg",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/jvm.cfg",
+              "kind": "file",
+              "bytes": "29",
+              "sha256": "aa9efb969444c1484e29adecab55a122458090616e766b2f1230ef05bc3867e0"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libattach.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libattach.so",
+              "kind": "file",
+              "bytes": "12808",
+              "sha256": "b40e3b5d598168832863922132aaa5997c504d2cfc6c20b0011bf02fc4263c23"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libawt.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libawt.so",
+              "kind": "file",
+              "bytes": "813496",
+              "sha256": "5e5ffbc8a68b0e74ae73d1568ac236b7ab74e29f226392b6f4397f4a6215bf07"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libawt_headless.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libawt_headless.so",
+              "kind": "file",
+              "bytes": "31872",
+              "sha256": "7815a5e96c196beb14944a5a260620dd02a38784e5d3ba9aa31e5e71d90e140e"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libawt_xawt.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libawt_xawt.so",
+              "kind": "file",
+              "bytes": "567640",
+              "sha256": "449a120fe0e44d6611d3773974f462f418c5cea94e6ac34a56bb8d952b1fdb26"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libdt_socket.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libdt_socket.so",
+              "kind": "file",
+              "bytes": "27568",
+              "sha256": "dcaace2630fcbbcea5c699fe322b013682e9641b080a2d8a60c2e823619f8b40"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libextnet.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libextnet.so",
+              "kind": "file",
+              "bytes": "12976",
+              "sha256": "c7e5ee2f1ef81b6a0b56d6331658a0c1c1f011d2fa73ca1adbd1f3c146ada4b4"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libfontmanager.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libfontmanager.so",
+              "kind": "file",
+              "bytes": "1951672",
+              "sha256": "7b6f4f71b245e82fb4e5f4a86ab8ce266ae951298c8d08c473c3b83e27bfdc5e"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libinstrument.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libinstrument.so",
+              "kind": "file",
+              "bytes": "54600",
+              "sha256": "f1d4f68db1704759e597d76bf943af315c7bc0e622824ceadb1526a2ef73b23b"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libj2gss.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libj2gss.so",
+              "kind": "file",
+              "bytes": "51184",
+              "sha256": "8efeb45e1ec119f112d61748eba9a696f84dda0dd8f168c7c371e56dc4ff856f"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libj2pcsc.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libj2pcsc.so",
+              "kind": "file",
+              "bytes": "17480",
+              "sha256": "8383662fec24dfce8687ff866437221ec01c7b251a5679a21a8e2d210998a6e8"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libj2pkcs11.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libj2pkcs11.so",
+              "kind": "file",
+              "bytes": "96744",
+              "sha256": "b565dca65f33edeef34d489c74ca5daf5def3722d94d691b03e1351d29cbacbb"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjaas.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjaas.so",
+              "kind": "file",
+              "bytes": "7744",
+              "sha256": "597a253f9677cb0e90abd74a470a2aa0c63deafd40462c0751248057b8d0e06e"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjava.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjava.so",
+              "kind": "file",
+              "bytes": "172704",
+              "sha256": "0d94c6af1a59f8269cf2e7bb59f21ef446dd2922a28851b2024a808401f9ceac"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjavajpeg.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjavajpeg.so",
+              "kind": "file",
+              "bytes": "235816",
+              "sha256": "4fa7096fb0e4923e59aeb2819ffdeea7c2b84a1ff396b2e43b6d3e80b0b8dfbd"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjawt.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjawt.so",
+              "kind": "file",
+              "bytes": "7736",
+              "sha256": "3a8ec1ba38fc7961acd34e072a41aaf4f666f841d0da676d59256ae53c18abff"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjdwp.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjdwp.so",
+              "kind": "file",
+              "bytes": "306520",
+              "sha256": "4d147914861356af6b1ff54659b23b17c15363627b8ae7e7dee24a9b692eae9e"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjimage.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjimage.so",
+              "kind": "file",
+              "bytes": "145552",
+              "sha256": "8ca49ce110e88c464fbca453341592021ddd0e5c00d02842b7eee98e59e1156f"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjli.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjli.so",
+              "kind": "file",
+              "bytes": "73304",
+              "sha256": "79531a9ba6654038e3b9fc9ea20619e179ac9f3494e6f1a0bae44a06da214f3d"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjsig.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjsig.so",
+              "kind": "file",
+              "bytes": "12808",
+              "sha256": "a093efd012f54fea3fa1de10a0a3788600ab23747c2620771e385a5bd03ab7cd"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjsound.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjsound.so",
+              "kind": "file",
+              "bytes": "80224",
+              "sha256": "e0eba20ca4100d277732da9b1ac4f0116f35a12d44b8ef8255524ed72670c79b"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjsvml.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libjsvml.so",
+              "kind": "file",
+              "bytes": "866496",
+              "sha256": "680030d54e058f08d6217a35e2de937e1dd829491b4b9163be645dccca3307e4"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/liblcms.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/liblcms.so",
+              "kind": "file",
+              "bytes": "607048",
+              "sha256": "1e66346bc6b1b8def6dad87bc2103b83a319ef52a142c6326a859bf85e518506"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libmanagement.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libmanagement.so",
+              "kind": "file",
+              "bytes": "29968",
+              "sha256": "693da894fd525892ffebc32dbdf3502cf18214652fc5110496b6844478e084c7"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libmanagement_agent.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libmanagement_agent.so",
+              "kind": "file",
+              "bytes": "7752",
+              "sha256": "a01ddf633f2d1671c6092b53edff79ead93ce3aaedbdd77deee2f4f04f08df4b"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libmanagement_ext.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libmanagement_ext.so",
+              "kind": "file",
+              "bytes": "33000",
+              "sha256": "d698db0d59978638796feb018e100a59794e18a498a12f1207e8aef247bc6536"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libmlib_image.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libmlib_image.so",
+              "kind": "file",
+              "bytes": "607208",
+              "sha256": "7a5b5cc6fc99fa9b29da5606470b2b87c5a3caadb64c038deb9bc85c197655fe"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libnet.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libnet.so",
+              "kind": "file",
+              "bytes": "61432",
+              "sha256": "3088aae3905015e233f9a5ec0c77ed8d7feb7f029e682e11b019502edab7ac88"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libnio.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libnio.so",
+              "kind": "file",
+              "bytes": "105008",
+              "sha256": "de34f6bdea868bf9e0dbc8d0ed933888d286145de637c3f49fe0ae00eb917887"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libprefs.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libprefs.so",
+              "kind": "file",
+              "bytes": "11976",
+              "sha256": "8a931e2a1bd18e9731224af802716748d6d585ffc49a4652c46b70a1ee498f5b"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/librmi.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/librmi.so",
+              "kind": "file",
+              "bytes": "7480",
+              "sha256": "7ce71cc3103e48df27a55027bd153ff204bc23fa9851f523f363926e2ab58bb5"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libsaproc.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libsaproc.so",
+              "kind": "file",
+              "bytes": "184200",
+              "sha256": "4be8d812282773625022a8f6de4ee2a49f558497eb3944514b4d7de0cf29548e"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libsctp.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libsctp.so",
+              "kind": "file",
+              "bytes": "27984",
+              "sha256": "9511a8aacc041dd1a859cd04615ce15cff9f3e71fcad9554a630f0b7809056e1"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libsimdsort.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libsimdsort.so",
+              "kind": "file",
+              "bytes": "262736",
+              "sha256": "f80d9af687e6e9343f895bd8383e86228a9d465127fb0525d14ccad76f9b35a1"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libsplashscreen.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libsplashscreen.so",
+              "kind": "file",
+              "bytes": "294664",
+              "sha256": "497c326fa923749000d0ca0fc91ced726f445c236f71644bbc611afa0032dae4"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libsyslookup.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libsyslookup.so",
+              "kind": "file",
+              "bytes": "7464",
+              "sha256": "dcc56679fa178b37737a3bd5d0a794836b890066192c70a5450e27c1859c18c7"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libverify.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libverify.so",
+              "kind": "file",
+              "bytes": "67920",
+              "sha256": "bb4e9d802c0ef0275928e8c7dd0cc9cc81b9fa6a2118f3eb3b28a1f4e2e1a005"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libzip.so",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/libzip.so",
+              "kind": "file",
+              "bytes": "40992",
+              "sha256": "8fdcafa371123734dc90e1ad72948211f21235e3112b852a489b6369d334bb74"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/modules",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/modules",
+              "kind": "file",
+              "bytes": "145842256",
+              "sha256": "7ce22300ece698ef5e43a407c2f5a8c4e5d8b101ef45dd97bccab1ed047f0090"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/psfont.properties.ja",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/psfont.properties.ja",
+              "kind": "file",
+              "bytes": "3793",
+              "sha256": "5a4bd51b969bf187ff86d94f4a71fdfbfa602762975fa3c73d264b4575f7c78f"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/psfontj2d.properties",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/psfontj2d.properties",
+              "kind": "file",
+              "bytes": "11402",
+              "sha256": "cfb2f55fc4a22368567273c38f1afe3fc627ad56710a1d922ada68015710e53f"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/security",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/security",
+              "kind": "directory",
+              "entries": [
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/security/blocked.certs",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/security/blocked.certs",
+                  "kind": "file",
+                  "bytes": "2488",
+                  "sha256": "96572f243f31c2ef81a6e627542e596f6a9295cff3c7ae095c1b595cb1457ded"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/security/cacerts",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/security/cacerts",
+                  "kind": "file",
+                  "bytes": "136706",
+                  "sha256": "40e3c531c5073e079cb541696e50119419c174b7b09ac894c3609573708b9cf9"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/security/public_suffix_list.dat",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/security/public_suffix_list.dat",
+                  "kind": "file",
+                  "bytes": "227396",
+                  "sha256": "16b42002aa6f83a7763c4cdbd399ecf738460377d447e362884495545afd60a3"
+                }
+              ]
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server",
+              "kind": "directory",
+              "entries": [
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/classes.jsa",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/classes.jsa",
+                  "kind": "file",
+                  "bytes": "15605760",
+                  "sha256": "adc457626e76296c7a18ebc2aee3b8f3e4798c3cf9d2c1c557adad3b24eaf23e"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/classes_coh.jsa",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/classes_coh.jsa",
+                  "kind": "file",
+                  "bytes": "16322560",
+                  "sha256": "7fa4fb9979f859baf8b0bd9b16adc0e5a2595c1bbbe65cb498f021f8df3b8cbe"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/classes_nocoops.jsa",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/classes_nocoops.jsa",
+                  "kind": "file",
+                  "bytes": "15998976",
+                  "sha256": "ca7ff30a6caf28448818556e6f1e14a2778ea253c0a0dd329f626ad4800eb5a6"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/classes_nocoops_coh.jsa",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/classes_nocoops_coh.jsa",
+                  "kind": "file",
+                  "bytes": "16650240",
+                  "sha256": "18bed4b5c6ec2a46e146cdb42001a531d5576de94553fcdeac8fcb62b710eb26"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/libjsig.so",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/libjsig.so",
+                  "kind": "file",
+                  "bytes": "12808",
+                  "sha256": "a093efd012f54fea3fa1de10a0a3788600ab23747c2620771e385a5bd03ab7cd"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/libjvm.so",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/server/libjvm.so",
+                  "kind": "file",
+                  "bytes": "29018632",
+                  "sha256": "e0a71f76cf937bcbde922f3060861fb72916fdd7f6a937e632cec0e7841bdeaf"
+                }
+              ]
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/src.zip",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/src.zip",
+              "kind": "file",
+              "bytes": "53031615",
+              "sha256": "a0c304ed07194cae0866832d38155dddb7b29c225ee6ff82548cbc07639c89cd"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/tzdb.dat",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/lib/tzdb.dat",
+              "kind": "file",
+              "bytes": "102956",
+              "sha256": "5906b44e25a8a730131d7ba1beb5d15af27043f6536f1a169ca8a5d8b8bed8f8"
+            }
+          ]
+        },
+        {
+          "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf",
+          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf",
+          "kind": "directory",
+          "entries": [
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/jaxp-strict.properties.template",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/jaxp-strict.properties.template",
+              "kind": "file",
+              "bytes": "4937",
+              "sha256": "3cc9b87633769414b22c24c97ecded8a15df630fe5ab12abca2398d88e31b32b"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/jaxp.properties",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/jaxp.properties",
+              "kind": "file",
+              "bytes": "8222",
+              "sha256": "d4f45052a100e5aef02b6638a3b9c69b2bdd46155ceb58a52671e5d594c30100"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/logging.properties",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/logging.properties",
+              "kind": "file",
+              "bytes": "2740",
+              "sha256": "8590633e1e8a7d88ffe74cc04189c5c61b1ed4703180cbc851dcd5575efcce74"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/management",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/management",
+              "kind": "directory",
+              "entries": [
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/management/jmxremote.access",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/management/jmxremote.access",
+                  "kind": "file",
+                  "bytes": "3997",
+                  "sha256": "0c25d26ee212ca1e8c33f67c3c460d43fe849c3a1d23dbe341148517602b280c"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/management/jmxremote.password.template",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/management/jmxremote.password.template",
+                  "kind": "file",
+                  "bytes": "5690",
+                  "sha256": "0273b6a6b9e20e6ce54c5aee70164028e0395063b2b7d39060a40b6495543dbf"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/management/management.properties",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/management/management.properties",
+                  "kind": "file",
+                  "bytes": "15015",
+                  "sha256": "75e60327531d34d1ce5eb507db52711a1d926b9c77d14d6b3a392d747105488d"
+                }
+              ]
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/net.properties",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/net.properties",
+              "kind": "file",
+              "bytes": "7341",
+              "sha256": "f0093906820c30e079cbf79bd744d761aaf32ae917598c7ce71fac7eae16f86d"
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/sdp",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/sdp",
+              "kind": "directory",
+              "entries": [
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/sdp/sdp.conf.template",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/sdp/sdp.conf.template",
+                  "kind": "file",
+                  "bytes": "1455",
+                  "sha256": "e9441e51f0d29e25313d33a9005640f11ad93c27f01bc46a34bf02f2a98ffd6b"
+                }
+              ]
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security",
+              "kind": "directory",
+              "entries": [
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/java.security",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/java.security",
+                  "kind": "file",
+                  "bytes": "74132",
+                  "sha256": "7c43432bc33b890d4e750f6886f383785a35a9b6021c34c84fcde11bb15c152d"
+                },
+                {
+                  "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy",
+                  "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy",
+                  "kind": "directory",
+                  "entries": [
+                    {
+                      "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/README.txt",
+                      "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/README.txt",
+                      "kind": "file",
+                      "bytes": "2390",
+                      "sha256": "6da0747334b0fea7592fd92614b2bbc8b126535e129b1fee483774d914e98eb5"
+                    },
+                    {
+                      "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/limited",
+                      "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/limited",
+                      "kind": "directory",
+                      "entries": [
+                        {
+                          "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/limited/default_US_export.policy",
+                          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/limited/default_US_export.policy",
+                          "kind": "file",
+                          "bytes": "146",
+                          "sha256": "758b930a526fc670ab7537f8c26321527050a31f5f42149a2dda623c56a0a1a9"
+                        },
+                        {
+                          "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/limited/default_local.policy",
+                          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/limited/default_local.policy",
+                          "kind": "file",
+                          "bytes": "647",
+                          "sha256": "2b2627548e61316150d47ffc3e6cad465ca05b3cccd4785eb7d21aa7baa0f441"
+                        },
+                        {
+                          "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/limited/exempt_local.policy",
+                          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/limited/exempt_local.policy",
+                          "kind": "file",
+                          "bytes": "566",
+                          "sha256": "8c3d7648abcd95a272ce12db870082937f4d7f6878d730d83cb7fbb31eb8b2c9"
+                        }
+                      ]
+                    },
+                    {
+                      "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/unlimited",
+                      "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/unlimited",
+                      "kind": "directory",
+                      "entries": [
+                        {
+                          "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/unlimited/default_US_export.policy",
+                          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/unlimited/default_US_export.policy",
+                          "kind": "file",
+                          "bytes": "146",
+                          "sha256": "758b930a526fc670ab7537f8c26321527050a31f5f42149a2dda623c56a0a1a9"
+                        },
+                        {
+                          "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/unlimited/default_local.policy",
+                          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/security/policy/unlimited/default_local.policy",
+                          "kind": "file",
+                          "bytes": "193",
+                          "sha256": "8d8a318e6d90dfd7e26612d2b6385aa704f686ca6134c551f8928418d92b851a"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "path": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/sound.properties",
+              "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/conf/sound.properties",
+              "kind": "file",
+              "bytes": "1210",
+              "sha256": "299c2360b6155eb28990ec49cd21753f97e43442fe8fab03e04f3e213df43a66"
+            }
+          ]
+        },
+        {
+          "path": "/home/codespace/java/current/bin/javac",
+          "resolved": "/usr/local/sdkman/candidates/java/25.0.4+1-ms/bin/javac",
+          "kind": "file",
+          "bytes": "12416",
+          "sha256": "24eccf1f812ddad4d6805d4ff9ac5f20adffa0b71b51596447e2898bc32e54d5"
+        }
+      ],
+      "source": [
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/link-web-target-standalone.js",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/link-web-target-standalone.js",
+          "kind": "file",
+          "bytes": "12814",
+          "sha256": "4608827297330d76aff7019a3697726b0206fec720618d6f96e8fda062ba668f"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/generated/client-program.classpath",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/generated/client-program.classpath",
+          "kind": "file",
+          "bytes": "9199",
+          "sha256": "08f0d7c7ac73d37afadb9c52b9aba9fb7a9d4d7712fd9742fc0282548d4810cb"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/field-overlay-link.js",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/field-overlay-link.js",
+          "kind": "file",
+          "bytes": "3110",
+          "sha256": "48a7a6679b0fb07ebf6ac9d6b9642890c6f088582f667d933b6e101a71b39223"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/standalone-link-cache.js",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/standalone-link-cache.js",
+          "kind": "file",
+          "bytes": "10921",
+          "sha256": "b566c09db502a100b41832d9c68feca1be91b8d5a4c4cd01c8f47cc35e050a2c"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/standalone-classpaths.js",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/standalone-classpaths.js",
+          "kind": "file",
+          "bytes": "1249",
+          "sha256": "57d7581a032a15bb2b140da731d02df32faf7d9793a0199ab41bf8d6c8aaf281"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/run-memory-capped.js",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/run-memory-capped.js",
+          "kind": "file",
+          "bytes": "5489",
+          "sha256": "effe74d1c2cf0da5fae3ee9ea57d9df7f5b6504fc85b61a22dd24256b796bb57"
+        },
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/StandaloneTeaVMLinker.java",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/StandaloneTeaVMLinker.java",
+          "kind": "file",
+          "bytes": "4193",
+          "sha256": "4f670c69ac035f3990490d6e09a9b98597b1de3f0794257e2332c264fc892a1f"
+        }
+      ]
+    }
+  },
+  "outputs": [
+    {
+      "path": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/generated/teavm/wasm-gc-standalone",
+      "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/generated/teavm/wasm-gc-standalone",
+      "kind": "directory",
+      "entries": [
+        {
+          "path": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/generated/teavm/wasm-gc-standalone/classes.wasm",
+          "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc/build/generated/teavm/wasm-gc-standalone/classes.wasm",
+          "kind": "file",
+          "bytes": "102926209",
+          "sha256": "c410e5a9b8c7405cd3e644af5b81c21c60b51bfa3621962260a6694aaab1a961"
+        }
+      ]
+    }
+  ]
+}

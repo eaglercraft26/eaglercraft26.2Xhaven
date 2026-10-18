@@ -72,11 +72,11 @@ public class ClientPackSource extends BuiltInPackSource {
          return new net.lax1dude.eaglercraft.v1_8.minecraft.EaglerEPKPackResources(
             VANILLA_PACK_INFO, BUILT_IN_METADATA,
             net.lax1dude.eaglercraft.v1_8.minecraft.EaglerEPKPackResources.discoverNamespaces(
-               PackType.CLIENT_RESOURCES, java.util.Set.of("minecraft", "realms", "eagler"), assets), assets);
+               PackType.CLIENT_RESOURCES, java.util.Set.of("minecraft", "realms", "eagler", "appleskin"), assets), assets);
       }
       VanillaPackResourcesBuilder builder = new VanillaPackResourcesBuilder()
          .setMetadata(BUILT_IN_METADATA)
-         .exposeNamespace("minecraft", "realms");
+         .exposeNamespace("minecraft", "realms", "appleskin");
       if (net.lax1dude.eaglercraft.v1_8.minecraft.EaglerHosted.isActive()) {
          builder.exposeNamespace("eagler");
       }

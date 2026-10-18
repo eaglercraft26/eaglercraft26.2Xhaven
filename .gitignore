@@ -20,3 +20,5 @@
 !.env.example
 *.pem
 *.key
+/Haven-26.2.html
+/fast-client.html

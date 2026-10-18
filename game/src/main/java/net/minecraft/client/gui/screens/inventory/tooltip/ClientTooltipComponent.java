@@ -8,12 +8,15 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 
 public interface ClientTooltipComponent {
    static ClientTooltipComponent create(final FormattedCharSequence charSequence) {
+      if (charSequence instanceof squeek.appleskin.client.TooltipOverlayHandler.FoodOverlayTextComponent foodText) {
+         return foodText.foodOverlay;
+      }
+
       return new ClientTextTooltip(charSequence);
    }
 
    static ClientTooltipComponent create(final TooltipComponent component) {
       return switch (component) {
-         case net.minecraft.world.inventory.tooltip.ShulkerBoxTooltip shulkerTooltip -> new ClientShulkerBoxTooltip(shulkerTooltip.contents());
          case BundleTooltip bundleTooltip -> new ClientBundleTooltip(bundleTooltip.contents());
          case ClientActivePlayersTooltip.ActivePlayersTooltip activePlayersTooltip -> new ClientActivePlayersTooltip(activePlayersTooltip);
          default -> throw new IllegalArgumentException("Unknown TooltipComponent");

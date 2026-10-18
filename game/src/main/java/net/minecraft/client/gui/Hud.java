@@ -64,7 +64,6 @@ import net.minecraft.world.entity.PlayerRideableJumping;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.AttackRange;
 import net.minecraft.world.item.equipment.Equippable;
@@ -890,6 +889,8 @@ public class Hud {
             this.extractHeart(graphics, type, xo, yo, isHardcore, false, halfHeart);
          }
       }
+   
+      squeek.appleskin.client.HUDOverlayHandler.postRenderHealth(graphics, player, xLeft, yLineBase, healthRowHeight, heartOffsetIndex, maxHealth, oldHealth, currentHealth, absorption, blink);
    }
 
    private void extractHeart(
@@ -957,17 +958,9 @@ public class Hud {
    }
 
    private void extractFood(final GuiGraphicsExtractor graphics, final Player player, final int yLineBase, final int xRight) {
+      squeek.appleskin.client.HUDOverlayHandler.preRenderFood(graphics, player, yLineBase, xRight);
       FoodData foodData = player.getFoodData();
       int food = foodData.getFoodLevel();
-      float saturation = foodData.getSaturationLevel();
-      FoodProperties appleSkinFood = null;
-      for (ItemStack appleSkinStack : new ItemStack[]{player.getMainHandItem(), player.getOffhandItem()}) {
-         FoodProperties fp = appleSkinStack.get(DataComponents.FOOD);
-         if (fp != null) {
-            appleSkinFood = fp;
-            break;
-         }
-      }
 
       for (int i = 0; i < 10; i++) {
          int yo = yLineBase;
@@ -997,25 +990,9 @@ public class Hud {
          if (i * 2 + 1 == food) {
             graphics.blitSprite(RenderPipelines.GUI_TEXTURED, half, xo, yo, 9, 9);
          }
-
-         // AppleSkin: held-food hunger preview (flashing) and saturation overlay
-         if (appleSkinFood != null) {
-            int newFood = Math.min(20, food + appleSkinFood.nutrition());
-            float a = 0.2F + 0.4F * (0.5F + 0.5F * Mth.sin((float)this.tickCount * 0.25F));
-            int c = ARGB.colorFromFloat(a, 1.0F, 1.0F, 1.0F);
-            if (i * 2 + 1 < newFood && i * 2 + 1 >= food) {
-               graphics.fill(xo + 1, yo + 1, xo + 8, yo + 8, c);
-            } else if (i * 2 + 1 == newFood && i * 2 + 1 >= food) {
-               graphics.fill(xo + 1, yo + 1, xo + 5, yo + 8, c);
-            }
-         }
-
-         float satLeft = saturation - i * 2.0F;
-         if (satLeft > 0.0F && i * 2 < food) {
-            int w = satLeft >= 2.0F ? 9 : (satLeft >= 1.0F ? 5 : 2);
-            graphics.fill(xo, yo + 9, xo + w, yo + 10, 0xFFFFC800);
-         }
       }
+   
+      squeek.appleskin.client.HUDOverlayHandler.postRenderFood(graphics, player, yLineBase, xRight);
    }
 
    private void extractVehicleHealth(final GuiGraphicsExtractor graphics) {
@@ -1210,6 +1187,7 @@ public class Hud {
       }
 
       this.tickCount++;
+      squeek.appleskin.client.HUDOverlayHandler.onClientTick();
       Entity camera = this.minecraft.getCameraEntity();
       if (camera != null) {
          this.updateVignetteBrightness(camera);

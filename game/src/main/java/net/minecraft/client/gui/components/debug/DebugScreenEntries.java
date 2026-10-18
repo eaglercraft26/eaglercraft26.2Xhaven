@@ -63,6 +63,10 @@ public class DebugScreenEntries {
       return identifier;
    }
 
+   public static Identifier registerExternal(final Identifier identifier, final DebugScreenEntry entry) {
+      return register(identifier, entry);
+   }
+
    public static Map<Identifier, DebugScreenEntry> allEntries() {
       return Map.copyOf(ENTRIES_BY_ID);
    }

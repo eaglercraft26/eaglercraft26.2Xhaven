@@ -164,6 +164,17 @@ if (!skipBuild) {
   console.log(`[single-html] RAM: ${(detectedMemory.availableMiB / 1024).toFixed(1)} GiB available; reserve ${(detectedMemory.reserveMiB / 1024).toFixed(1)} GiB; process cap ${buildLimitMiB} MiB; Java heap ${gradleHeapMiB} MiB.`);
 }
 
+function linkerMemoryEnv() {
+  const cap = String(Math.min(13312, Math.max(10240, buildLimitMiB)));
+  const heap = String(Math.max(8192, Math.min(12288, buildLimitMiB - 2048)));
+  return {
+    EAGLER_LINK_CAP_MIB: process.env.EAGLER_LINK_CAP_MIB || cap,
+    EAGLER_LINK_HEAP_MIB: process.env.EAGLER_LINK_HEAP_MIB || heap,
+    EAGLER_SERVER_LINK_CAP_MIB: process.env.EAGLER_SERVER_LINK_CAP_MIB || cap,
+    EAGLER_SERVER_LINK_HEAP_MIB: process.env.EAGLER_SERVER_LINK_HEAP_MIB || heap
+  };
+}
+
 function run(command, commandArgs, extraEnv = {}) {
   console.log(`[single-html] ${command} ${commandArgs.join(" ")}`);
   const capRunner = path.join(repo, "wasm-toolchain", "run-memory-capped.js");
@@ -173,7 +184,7 @@ function run(command, commandArgs, extraEnv = {}) {
     buildLimitMiB,
     command,
     ...commandArgs
-  ], { cwd: repo, stdio: "inherit", env: { ...process.env, ...extraEnv } });
+  ], { cwd: repo, stdio: "inherit", env: { ...process.env, ...linkerMemoryEnv(), ...extraEnv } });
   if (result.error) fail(result.error.message);
   if (result.status !== 0) fail(`${command} exited with code ${result.status}`);
 }
