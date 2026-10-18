@@ -209,7 +209,8 @@ public class ExperienceOrb extends Entity {
       List<ExperienceOrb> orbs = level.getEntities(EntityTypeTest.forClass(ExperienceOrb.class), box, orbx -> canMerge(orbx, id, value));
       if (!orbs.isEmpty()) {
          ExperienceOrb orb = orbs.get(0);
-         orb.count++;
+         orb.setValue(orb.getValue() * orb.count + value);
+         orb.count = 1;
          orb.age = 0;
          return true;
       } else {
@@ -222,11 +223,12 @@ public class ExperienceOrb extends Entity {
    }
 
    private static boolean canMerge(final ExperienceOrb orb, final int id, final int value) {
-      return !orb.isRemoved() && (orb.getId() - id) % 40 == 0 && orb.getValue() == value;
+      return !orb.isRemoved();
    }
 
    private void merge(final ExperienceOrb orb) {
-      this.count = this.count + orb.count;
+      this.setValue(this.getValue() * this.count + orb.getValue() * orb.count);
+      this.count = 1;
       this.age = Math.min(this.age, orb.age);
       orb.discard();
    }
@@ -264,7 +266,7 @@ public class ExperienceOrb extends Entity {
    protected void addAdditionalSaveData(final ValueOutput output) {
       output.putShort("Health", (short)this.health);
       output.putShort("Age", (short)this.age);
-      output.putShort("Value", (short)this.getValue());
+      output.putInt("Value", this.getValue());
       output.putInt("Count", this.count);
    }
 
@@ -272,7 +274,7 @@ public class ExperienceOrb extends Entity {
    protected void readAdditionalSaveData(final ValueInput input) {
       this.health = input.getShortOr("Health", (short)5);
       this.age = input.getShortOr("Age", (short)0);
-      this.setValue(input.getShortOr("Value", (short)0));
+      this.setValue(input.getIntOr("Value", 0));
       this.count = input.<Integer>read("Count", ExtraCodecs.POSITIVE_INT).orElse(1);
    }
 

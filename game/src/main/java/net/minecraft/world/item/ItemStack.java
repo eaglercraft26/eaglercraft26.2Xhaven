@@ -211,7 +211,19 @@ public final class ItemStack implements DataComponentHolder, ItemInstance {
       };
    }
 
+   public static boolean isShulkerBox(final ItemStack stack) {
+      return stack.getItem() instanceof net.minecraft.world.item.BlockItem blockItem
+         && blockItem.getBlock() instanceof net.minecraft.world.level.block.ShulkerBoxBlock;
+   }
+
    public Optional<TooltipComponent> getTooltipImage() {
+      if (isShulkerBox(this)) {
+         ItemContainerContents shulkerContents = this.get(DataComponents.CONTAINER);
+         if (shulkerContents != null && shulkerContents.nonEmptyItemCopyStream().findAny().isPresent()) {
+            return Optional.of(new net.minecraft.world.inventory.tooltip.ShulkerBoxTooltip(shulkerContents));
+         }
+      }
+
       return this.getItem().getTooltipImage(this);
    }
 
@@ -843,6 +855,10 @@ public final class ItemStack implements DataComponentHolder, ItemInstance {
       final TooltipFlag flag
    ) {
       T component = (T)this.get(type);
+      if (type == DataComponents.CONTAINER && isShulkerBox(this)) {
+         return;
+      }
+
       if (component != null && display.shows(type)) {
          component.addToTooltip(context, consumer, flag, this.components);
       }
