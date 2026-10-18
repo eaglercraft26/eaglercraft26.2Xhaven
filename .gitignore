@@ -1,0 +1,22 @@
+
+# Haven local/build exclusions
+/.gradle/
+/build/
+/node_modules/
+/client.jar
+/Eaglercraft-26.2-u2-Setup.jar
+/eaglercraft-26.2-source/
+/vineflower.log
+**/.gradle/
+**/build/
+**/node_modules/
+*.epk
+*.wasm
+*.swbn
+*.class
+*.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key
