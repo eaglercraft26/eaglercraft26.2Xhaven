@@ -629,6 +629,8 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
       this.resourceManager.registerReloadListener(this.regionalCompliancies);
       this.gui = new Gui(this, new Hud(this), this.gameRenderer.gameRenderState().guiRenderState);
       squeek.appleskin.AppleSkin.init(this.gameDirectory);
+      com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.init(this.gameDirectory);
+      me.cominixo.betterf3.BetterF3Fabric.init(this.gameDirectory);
       this.gui.registerReloadListeners(this.resourceManager);
       RenderSystem.setErrorCallback(this::onFullscreenError);
       RenderTarget mainRenderTarget = this.gameRenderer.mainRenderTarget();

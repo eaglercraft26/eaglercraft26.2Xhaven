@@ -212,7 +212,15 @@ public final class ItemStack implements DataComponentHolder, ItemInstance {
    }
 
    public Optional<TooltipComponent> getTooltipImage() {
-      return this.getItem().getTooltipImage(this);
+      Optional<TooltipComponent> shulkerTooltip = com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.getTooltipImage(this);
+      if (shulkerTooltip.isPresent()) {
+         return shulkerTooltip;
+      }
+      Optional<TooltipComponent> tooltipImage = this.getItem().getTooltipImage(this);
+      if (tooltipImage.isPresent()) {
+         return tooltipImage;
+      }
+      return Optional.empty();
    }
 
    @Override
@@ -858,6 +866,7 @@ public final class ItemStack implements DataComponentHolder, ItemInstance {
          lines.add(this.getStyledHoverName());
          this.addDetailsToTooltip(context, display, player, tooltipFlag, lines::add);
          squeek.appleskin.client.TooltipOverlayHandler.onItemTooltip(this, player, context, tooltipFlag, lines);
+         com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.appendTooltipHints(this, lines);
          return lines;
       }
    }
@@ -874,8 +883,17 @@ public final class ItemStack implements DataComponentHolder, ItemInstance {
       this.addToTooltip(DataComponents.INSTRUMENT, context, display, builder, tooltipFlag);
       this.addToTooltip(DataComponents.MAP_ID, context, display, builder, tooltipFlag);
       this.addToTooltip(DataComponents.BEES, context, display, builder, tooltipFlag);
-      this.addToTooltip(DataComponents.CONTAINER_LOOT, context, display, builder, tooltipFlag);
-      this.addToTooltip(DataComponents.CONTAINER, context, display, builder, tooltipFlag);
+      if (com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.shouldShowVanillaContainerTooltip(this)) {
+         this.addToTooltip(DataComponents.CONTAINER_LOOT, context, display, builder, tooltipFlag);
+      }
+      if (com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.shouldShowVanillaContainerTooltip(this)) {
+         this.addToTooltip(DataComponents.CONTAINER, context, display, builder, tooltipFlag);
+      }
+      if (display.shows(DataComponents.CONTAINER)
+         || display.shows(DataComponents.CONTAINER_LOOT)
+         || com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.hasRegisteredPreviewProvider(this)) {
+         com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.appendTooltipDetails(this, builder);
+      }
       this.addToTooltip(DataComponents.BANNER_PATTERNS, context, display, builder, tooltipFlag);
       this.addToTooltip(DataComponents.POT_DECORATIONS, context, display, builder, tooltipFlag);
       this.addToTooltip(DataComponents.WRITTEN_BOOK_CONTENT, context, display, builder, tooltipFlag);
@@ -889,7 +907,9 @@ public final class ItemStack implements DataComponentHolder, ItemInstance {
       this.addToTooltip(DataComponents.ENCHANTMENTS, context, display, builder, tooltipFlag);
       this.addToTooltip(DataComponents.DYED_COLOR, context, display, builder, tooltipFlag);
       this.addToTooltip(DataComponents.PROFILE, context, display, builder, tooltipFlag);
-      this.addToTooltip(DataComponents.LORE, context, display, builder, tooltipFlag);
+      if (!com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.hideShulkerLore(this)) {
+         this.addToTooltip(DataComponents.LORE, context, display, builder, tooltipFlag);
+      }
       this.addToTooltip(DataComponents.SULFUR_CUBE_CONTENT, context, display, builder, tooltipFlag);
       this.addAttributeTooltips(builder, display, player);
       this.addUnitComponentToTooltip(DataComponents.INTANGIBLE_PROJECTILE, INTANGIBLE_TOOLTIP, display, builder);

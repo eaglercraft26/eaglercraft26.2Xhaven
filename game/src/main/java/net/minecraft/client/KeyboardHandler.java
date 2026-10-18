@@ -434,6 +434,16 @@ public class KeyboardHandler {
          }
 
          Screen screen = this.minecraft.gui.screen();
+         if (action == 1 && screen == null && debugModifierDown && event.key() == 295) {
+            me.cominixo.betterf3.BetterF3Fabric.openConfigScreen();
+            KeyMapping.set(InputConstants.getKey(event), false);
+            return;
+         }
+         if (action == 1 && screen == null && debugModifierDown && event.key() == 296) {
+            this.minecraft.gui.setScreen(new com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltipConfigScreen(null));
+            KeyMapping.set(InputConstants.getKey(event), false);
+            return;
+         }
          if (screen != null) {
             switch (event.key()) {
                case 258:

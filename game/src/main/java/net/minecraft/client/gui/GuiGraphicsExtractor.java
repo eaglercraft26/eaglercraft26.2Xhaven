@@ -97,6 +97,10 @@ public class GuiGraphicsExtractor {
    private @Nullable Style hoveredTextStyle;
    private @Nullable Style clickableTextStyle;
    private @Nullable Renderable preeditOverlay;
+   private int tooltipX;
+   private int tooltipY;
+   private int tooltipWidth;
+   private int tooltipHeight;
 
    private GuiGraphicsExtractor(final Minecraft minecraft, final Matrix3x2fStack pose, final GuiRenderState guiRenderState, final int mouseX, final int mouseY) {
       this.minecraft = minecraft;
@@ -128,6 +132,30 @@ public class GuiGraphicsExtractor {
 
    public int guiHeight() {
       return this.minecraft.getWindow().getGuiScaledHeight();
+   }
+
+   public int mouseX() {
+      return this.mouseX;
+   }
+
+   public int mouseY() {
+      return this.mouseY;
+   }
+
+   public int tooltipX() {
+      return this.tooltipX;
+   }
+
+   public int tooltipY() {
+      return this.tooltipY;
+   }
+
+   public int tooltipWidth() {
+      return this.tooltipWidth;
+   }
+
+   public int tooltipHeight() {
+      return this.tooltipHeight;
    }
 
    public Matrix3x2fStack pose() {
@@ -1275,25 +1303,35 @@ public class GuiGraphicsExtractor {
       Vector2ic positionedTooltip = positioner.positionTooltip(this.guiWidth(), this.guiHeight(), xo, yo, w, h);
       int x = positionedTooltip.x();
       int y = positionedTooltip.y();
+      this.tooltipX = x;
+      this.tooltipY = y;
+      this.tooltipWidth = w;
+      this.tooltipHeight = h;
       this.pose.pushMatrix();
-      TooltipRenderUtil.extractTooltipBackground(this, x, y, w, h, style);
-      int localY = y;
+      try {
+         TooltipRenderUtil.extractTooltipBackground(this, x, y, w, h, style);
+         int localY = y;
 
-      for (int i = 0; i < lines.size(); i++) {
-         ClientTooltipComponent line = lines.get(i);
-         line.extractText(this, font, x, localY);
-         localY += line.getHeight(font) + (i == 0 ? 2 : 0);
+         for (int i = 0; i < lines.size(); i++) {
+            ClientTooltipComponent line = lines.get(i);
+            line.extractText(this, font, x, localY);
+            localY += line.getHeight(font) + (i == 0 ? 2 : 0);
+         }
+
+         localY = y;
+
+         for (int i = 0; i < lines.size(); i++) {
+            ClientTooltipComponent line = lines.get(i);
+            line.extractImage(font, x, localY, w, h, this);
+            localY += line.getHeight(font) + (i == 0 ? 2 : 0);
+         }
+      } finally {
+         this.pose.popMatrix();
+         this.tooltipX = 0;
+         this.tooltipY = 0;
+         this.tooltipWidth = 0;
+         this.tooltipHeight = 0;
       }
-
-      localY = y;
-
-      for (int i = 0; i < lines.size(); i++) {
-         ClientTooltipComponent line = lines.get(i);
-         line.extractImage(font, x, localY, w, h, this);
-         localY += line.getHeight(font) + (i == 0 ? 2 : 0);
-      }
-
-      this.pose.popMatrix();
    }
 
    public void setPreeditOverlay(final Renderable preeditOverlay) {

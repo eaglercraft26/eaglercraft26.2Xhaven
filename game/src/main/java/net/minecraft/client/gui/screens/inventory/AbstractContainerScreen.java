@@ -53,6 +53,9 @@ public abstract class AbstractContainerScreen<T extends AbstractContainerMenu> e
    private int quickCraftingRemainder;
    private boolean doubleclick;
    private ItemStack lastQuickMoved = ItemStack.EMPTY;
+   private ItemStack shulkerTooltipLockStack = ItemStack.EMPTY;
+   private int shulkerTooltipLockX;
+   private int shulkerTooltipLockY;
 
    public AbstractContainerScreen(final T menu, final Inventory inventory, final Component title) {
       this(menu, inventory, title, 176, 166);
@@ -163,6 +166,31 @@ public abstract class AbstractContainerScreen<T extends AbstractContainerMenu> e
    }
 
    protected void extractTooltip(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY) {
+      boolean lockPressed = com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.isLockKeyPressed();
+      if (!lockPressed) {
+         this.shulkerTooltipLockStack = ItemStack.EMPTY;
+      } else if (this.shulkerTooltipLockStack.isEmpty()
+         && this.hoveredSlot != null
+         && this.hoveredSlot.hasItem()
+         && com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.isPreviewable(this.hoveredSlot.getItem())) {
+         this.shulkerTooltipLockStack = this.hoveredSlot.getItem().copy();
+         this.shulkerTooltipLockX = mouseX;
+         this.shulkerTooltipLockY = mouseY;
+      }
+
+      if (lockPressed && !this.shulkerTooltipLockStack.isEmpty()) {
+         ItemStack lockedStack = this.shulkerTooltipLockStack;
+         graphics.setTooltipForNextFrame(
+            this.font,
+            this.getTooltipFromContainerItem(lockedStack),
+            lockedStack.getTooltipImage(),
+            this.shulkerTooltipLockX,
+            this.shulkerTooltipLockY,
+            lockedStack.get(DataComponents.TOOLTIP_STYLE)
+         );
+         return;
+      }
+
       if (this.hoveredSlot != null && this.hoveredSlot.hasItem()) {
          ItemStack item = this.hoveredSlot.getItem();
          if (this.menu.getCarried().isEmpty() || this.showTooltipWithItemInHand(item)) {
@@ -578,6 +606,7 @@ public abstract class AbstractContainerScreen<T extends AbstractContainerMenu> e
    @Override
    public void onClose() {
       this.minecraft.player.closeContainer();
+      this.shulkerTooltipLockStack = ItemStack.EMPTY;
       if (this.hoveredSlot != null) {
          this.onStopHovering(this.hoveredSlot);
       }

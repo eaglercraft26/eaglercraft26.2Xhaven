@@ -9,6 +9,11 @@
       "type": "minecraft:directory",
       "prefix": "mob_effect/",
       "source": "mob_effect"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "shulkerboxtooltip:shulker_box_tooltip",
+      "sprite": "shulkerboxtooltip:shulker_box_tooltip"
     }
   ]
 }

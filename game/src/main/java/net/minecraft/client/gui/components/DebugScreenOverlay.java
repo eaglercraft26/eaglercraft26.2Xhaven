@@ -19,6 +19,7 @@ import net.minecraft.client.Options;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.debug.DebugScreenDisplayer;
+import net.minecraft.client.gui.components.debug.DebugEntryCategory;
 import net.minecraft.client.gui.components.debug.DebugScreenEntries;
 import net.minecraft.client.gui.components.debug.DebugScreenEntry;
 import net.minecraft.client.gui.components.debug.DebugScreenEntryList;
@@ -47,8 +48,6 @@ import net.minecraft.world.level.chunk.status.ChunkStatus;
 import org.jspecify.annotations.Nullable;
 
 public class DebugScreenOverlay {
-   private static final org.slf4j.Logger LOGGER = com.mojang.logging.LogUtils.getLogger();
-   private static final java.util.Set<Identifier> DEBUG_ENTRY_WARNED = new java.util.HashSet<>();
    private static final int MARGIN_RIGHT = 2;
    private static final int MARGIN_LEFT = 2;
    private static final int MARGIN_TOP = 2;
@@ -93,12 +92,13 @@ public class DebugScreenOverlay {
       Options options = this.minecraft.options;
       if (this.minecraft.isGameLoadFinished() && (!this.minecraft.gui.hud.isHidden() || this.minecraft.gui.screen() != null)) {
          Collection<Identifier> visibleEntries = this.minecraft.debugEntries.getCurrentlyEnabled();
+         boolean betterF3Active = me.cominixo.betterf3.BetterF3Fabric.replacesVanillaOverlay(this.minecraft);
 		 if (options.showPerformanceCounters().get() && visibleEntries.isEmpty() && !this.minecraft.debugEntries.isOverlayVisible()
 				 && this.minecraft.level != null && this.minecraft.gui.screen() == null) {
 			 graphics.nextStratum();
 			 this.extractCompactPerformance(graphics);
 		 }
-         if (!visibleEntries.isEmpty()) {
+         if (!visibleEntries.isEmpty() || betterF3Active) {
             graphics.nextStratum();
             ProfilerFiller profiler = Profiler.get();
             profiler.push("debug");
@@ -118,10 +118,13 @@ public class DebugScreenOverlay {
             final List<String> leftLines = new ArrayList<>();
             final List<String> rightLines = new ArrayList<>();
             final Map<Identifier, Collection<String>> groups = new LinkedHashMap<>();
+            final Map<Identifier, List<String>> betterF3Modules = new LinkedHashMap<>();
+            final Identifier[] currentEntry = {null};
             final List<String> regularLines = new ArrayList<>();
             DebugScreenDisplayer displayer = new DebugScreenDisplayer() {
                @Override
                public void addPriorityLine(final String line) {
+                  me.cominixo.betterf3.BetterF3Fabric.recordLine(betterF3Modules, currentEntry[0], line);
                   if (leftLines.size() > rightLines.size()) {
                      rightLines.add(line);
                   } else {
@@ -131,37 +134,45 @@ public class DebugScreenOverlay {
 
                @Override
                public void addLine(final String line) {
+                  me.cominixo.betterf3.BetterF3Fabric.recordLine(betterF3Modules, currentEntry[0], line);
                   regularLines.add(line);
                }
 
                @Override
                public void addToGroup(final Identifier group, final Collection<String> lines) {
                   groups.computeIfAbsent(group, k -> new ArrayList<>()).addAll(lines);
+                  me.cominixo.betterf3.BetterF3Fabric.recordGroup(betterF3Modules, group, lines);
                }
 
                @Override
                public void addToGroup(final Identifier group, final String lines) {
                   groups.computeIfAbsent(group, k -> new ArrayList<>()).add(lines);
+                  me.cominixo.betterf3.BetterF3Fabric.recordLine(betterF3Modules, group, lines);
                }
             };
             Level level = this.getLevel();
 
-            for (Identifier id : visibleEntries) {
+            Collection<Identifier> entriesToDisplay = me.cominixo.betterf3.BetterF3Fabric.entriesToDisplay(this.minecraft);
+            if (betterF3Active) {
+               java.util.Set<Identifier> allVisibleEntries = new java.util.LinkedHashSet<>(visibleEntries);
+               allVisibleEntries.addAll(entriesToDisplay);
+               entriesToDisplay = allVisibleEntries.stream()
+                  .filter(id -> {
+                     DebugScreenEntry entry = DebugScreenEntries.getEntry(id);
+                     return entry != null
+                        && entry.category() == DebugEntryCategory.SCREEN_TEXT
+                        && entry.isAllowed(this.minecraft.showOnlyReducedInfo());
+                  })
+                  .toList();
+            }
+            for (Identifier id : entriesToDisplay) {
                DebugScreenEntry entry = DebugScreenEntries.getEntry(id);
                if (entry != null) {
-                  // A single debug entry must never take down the render frame (F3). On the
-                  // web backend some entries hit not-yet-wired system stubs; isolate each so
-                  // the overlay degrades to a warning line instead of crashing the client.
-                  try {
-                     entry.display(displayer, level, this.getClientChunk(), this.getServerChunk());
-                  } catch (Throwable t) {
-                     if (DEBUG_ENTRY_WARNED.add(id)) {
-                        LOGGER.error("Debug screen entry '{}' failed and was skipped", id, t);
-                     }
-                     displayer.addLine("§c[" + id + " failed]");
-                  }
+                  currentEntry[0] = id;
+                  entry.display(displayer, level, this.getClientChunk(), this.getServerChunk());
                }
             }
+            currentEntry[0] = null;
 
             if (!leftLines.isEmpty()) {
                leftLines.add("");
@@ -199,8 +210,15 @@ public class DebugScreenOverlay {
                }
             }
 
-            this.extractLines(graphics, leftLines, true);
-            this.extractLines(graphics, rightLines, false);
+            if (betterF3Active) {
+               me.cominixo.betterf3.BetterF3Fabric.recordLegacyLines(betterF3Modules, leftLines, rightLines);
+               me.cominixo.betterf3.BetterF3Fabric.render(
+                  graphics, this.font, betterF3Modules, this.minecraft.gui.toastManager().getTopRightOccupiedHeight()
+               );
+            } else {
+               this.extractLines(graphics, leftLines, true);
+               this.extractLines(graphics, rightLines, false);
+            }
             graphics.nextStratum();
             this.profilerPieChart.setBottomOffset(10);
             if (this.showFpsCharts()) {

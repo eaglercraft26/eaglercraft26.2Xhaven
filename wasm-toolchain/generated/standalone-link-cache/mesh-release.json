@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "key": "eda2238641063e5dfd46de6d41293eb3da210599d82f61bc8294c6adab7b810f",
+  "key": "d5d86e3c9fafe7f82d4214dedc16d11b71b6bfdd6df46ce51357de3b421a88e1",
   "inputs": {
     "metadata": {
       "classpathFile": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/generated/mesh-program.classpath",
@@ -30,8 +30,8 @@
       },
       "fastDependencyAnalysis": false,
       "linkerClasses": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/generated/standalone-linker",
-      "linkerHeapMiB": 9728,
-      "linkerLimitMiB": 11776,
+      "linkerHeapMiB": 8192,
+      "linkerLimitMiB": 10240,
       "operation": "precise-link",
       "outputDirectory": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc_mesh/build/generated/teavm/wasm-gc-standalone",
       "requestedOptimization": "FULL",
@@ -230,8 +230,8 @@
           "path": "/workspaces/eaglercraft26.2Xhaven/game/build/libs/game.jar",
           "resolved": "/workspaces/eaglercraft26.2Xhaven/game/build/libs/game.jar",
           "kind": "file",
-          "bytes": "54543984",
-          "sha256": "aa34ea521c9ac3f6498d29115afeb2c9d431191f4c3b3c5d195e00c603f3ad16"
+          "bytes": "54676036",
+          "sha256": "47ba6a814a80451f34c14f3db925d227d3012c917f11ff9a4e8abd2529b7c71a"
         },
         {
           "path": "/workspaces/eaglercraft26.2Xhaven/platform/build/libs/platform.jar",
@@ -1567,7 +1567,7 @@
           "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc_mesh/build/generated/teavm/wasm-gc-standalone/mesh-worker.wasm",
           "kind": "file",
           "bytes": "18101074",
-          "sha256": "9f596a23f731f54446708c54fb26c6b8d9ab7f6f162ecb0b07ee14fcfad09c72"
+          "sha256": "150edd9a79ea6508ffdaee720c9837a1cd82045ace3e077fa26466aeb1776fe0"
         }
       ]
     }

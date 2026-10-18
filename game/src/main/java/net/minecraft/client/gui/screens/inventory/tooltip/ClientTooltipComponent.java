@@ -4,6 +4,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.inventory.tooltip.BundleTooltip;
+import net.minecraft.world.inventory.tooltip.ShulkerBoxTooltip;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 
 public interface ClientTooltipComponent {
@@ -18,6 +19,7 @@ public interface ClientTooltipComponent {
    static ClientTooltipComponent create(final TooltipComponent component) {
       return switch (component) {
          case BundleTooltip bundleTooltip -> new ClientBundleTooltip(bundleTooltip.contents());
+         case ShulkerBoxTooltip shulkerBoxTooltip -> new ClientShulkerBoxTooltip(shulkerBoxTooltip);
          case ClientActivePlayersTooltip.ActivePlayersTooltip activePlayersTooltip -> new ClientActivePlayersTooltip(activePlayersTooltip);
          default -> throw new IllegalArgumentException("Unknown TooltipComponent");
       };

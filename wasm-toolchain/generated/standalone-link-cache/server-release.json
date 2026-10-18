@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "key": "c25781ba05d574138de6d232c538d13b1010e77377989dc0aa374638646eeb80",
+  "key": "f6053d34de4be2fb8fb3000933572ccfac463da134e3bcae5d1b401006428373",
   "inputs": {
     "metadata": {
       "classpathFile": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/generated/server-program.classpath",
@@ -32,8 +32,8 @@
       "operation": "precise-link",
       "optimization": "ADVANCED",
       "outputDirectory": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc_server/build/generated/teavm/wasm-gc-standalone",
-      "serverLinkHeapMiB": 9728,
-      "serverLinkLimitMiB": 11776,
+      "serverLinkHeapMiB": 8192,
+      "serverLinkLimitMiB": 10240,
       "toolCommands": [
         {
           "command": "/usr/local/share/nvm/versions/node/v24.21.0/bin/node",
@@ -627,8 +627,8 @@
           "path": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/generated/game-server-slice.jar",
           "resolved": "/workspaces/eaglercraft26.2Xhaven/wasm-toolchain/generated/game-server-slice.jar",
           "kind": "file",
-          "bytes": "49195983",
-          "sha256": "78bebbe27c86c96c832e98ecb8703231d936c4c530f6b023058914f0b1b6490e"
+          "bytes": "49318657",
+          "sha256": "15cfd4464e12e57b23cfa0e9859999e03d5ca024800186bf31ab5599346c2a9f"
         },
         {
           "path": "/home/codespace/.gradle/caches/modules-2/files-2.1/com.mojang/jtracy/1.0.37/a3fb649b2e2b2288d2978f0b0bc3d83f62809d1e/jtracy-1.0.37.jar",
@@ -1565,7 +1565,7 @@
           "resolved": "/workspaces/eaglercraft26.2Xhaven/target_teavm_wasm_gc_server/build/generated/teavm/wasm-gc-standalone/server-worker.wasm",
           "kind": "file",
           "bytes": "43402375",
-          "sha256": "dfa48e709799bd0a5963212c27e14ab8a45654ff9606482644dba2a16f7862d3"
+          "sha256": "9a8296739f4c6d6bf4cf816517a6ef8340ac94d82bf737493b1588a7329044b0"
         }
       ]
     }
