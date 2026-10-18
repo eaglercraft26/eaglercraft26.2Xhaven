@@ -86,6 +86,10 @@ public class TextureAtlas extends AbstractTexture implements TickableTexture, Du
          throw new IllegalStateException("Atlas '" + this.location + "' (" + this.texturesByName.size() + " sprites) has no missing texture sprite");
       }
 
+      if (LOCATION_BLOCKS.equals(this.location)) {
+         net.minecraft.client.renderer.block.ConnectedTextures.populate(this);
+      }
+
       Builder<TextureAtlasSprite> spritesBuilder = ImmutableList.builder();
       int animatedSpriteCount = 0;
 

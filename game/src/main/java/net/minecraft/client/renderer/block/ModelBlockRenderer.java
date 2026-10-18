@@ -207,8 +207,9 @@ public class ModelBlockRenderer {
       final BlockAndTintGetter level,
       final BlockState state,
       final BlockPos pos,
-      final BakedQuad quad
+      BakedQuad quad
    ) {
+      quad = ConnectedTextures.apply(level, state, pos, quad);
       int tintIndex = quad.materialInfo().tintIndex();
       if (tintIndex != -1) {
          this.quadInstance.multiplyColor(this.getTintColor(level, state, pos, tintIndex));
