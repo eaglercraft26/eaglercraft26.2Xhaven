@@ -238,7 +238,8 @@ public class TitleScreen extends Screen {
       boolean multiplayerAllowed = multiplayerDisabledReason == null;
       Tooltip tooltip = multiplayerDisabledReason != null ? Tooltip.create(multiplayerDisabledReason) : null;
       this.addRenderableWidget(Button.builder(Component.translatable("menu.multiplayer"), button -> {
-         if (!liteMode && net.lax1dude.eaglercraft.v1_8.minecraft.EaglerHosted.isActive()) {
+         if (!liteMode && net.lax1dude.eaglercraft.v1_8.minecraft.EaglerHosted.isActive()
+            && net.lax1dude.eaglercraft.v1_8.sp.SingleplayerServerController26.needsRemoteHandoff()) {
             net.lax1dude.eaglercraft.v1_8.sp.SingleplayerServerController26.prepareForRemoteMultiplayer();
          }
          Screen screen = this.minecraft.options.skipMultiplayerWarning ? new JoinMultiplayerScreen(this) : new SafetyScreen(this);

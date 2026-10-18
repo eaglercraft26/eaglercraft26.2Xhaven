@@ -224,6 +224,11 @@ public class SingleplayerServerController26 {
 	 * multiplayer connection is allocated. Minecraft.disconnect() must run first
 	 * so an active world is saved and reaches a stopped state.
 	 */
+	/** True only when an integrated server, LAN relay or bridge is live and must be retired. */
+	public static boolean needsRemoteHandoff() {
+		return state != STATE_NONE || serverPublished;
+	}
+
 	public static void prepareForRemoteMultiplayer() {
 		unpublishLANRelay();
 		closeClientBridge();
