@@ -631,6 +631,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
       squeek.appleskin.AppleSkin.init(this.gameDirectory);
       com.misterpemodder.shulkerboxtooltip.ShulkerBoxTooltip.init(this.gameDirectory);
       me.cominixo.betterf3.BetterF3Fabric.init(this.gameDirectory);
+      ru.berdinskiybear.armorhud.ArmorHudPort.init(this.gameDirectory);
       this.gui.registerReloadListeners(this.resourceManager);
       RenderSystem.setErrorCallback(this::onFullscreenError);
       RenderTarget mainRenderTarget = this.gameRenderer.mainRenderTarget();
@@ -1996,6 +1997,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
       profiler.push("gui");
       this.textInputManager.tick();
       this.gui.tick();
+      ru.berdinskiybear.armorhud.ArmorHudPort.tick();
       if (this.gui.screen() != null) {
          this.missTime = 10000;
       }
@@ -2144,6 +2146,12 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
    }
 
    private void handleKeybinds() {
+      while (this.options.keyArmorHud.consumeClick()) {
+         ru.berdinskiybear.armorhud.ArmorHudPort.toggle();
+         if (this.player != null) {
+            this.gui.hud.setOverlayMessage(Component.translatable("armorhud.keybind.toggle.msg"), true);
+         }
+      }
       while (this.options.keyTogglePerspective.consumeClick()) {
          CameraType previous = this.options.getCameraType();
          this.options.setCameraType(this.options.getCameraType().cycle());

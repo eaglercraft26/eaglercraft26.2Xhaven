@@ -60,7 +60,7 @@ public class BossHealthOverlay {
          ProfilerFiller profiler = Profiler.get();
          profiler.push("bossHealth");
          int screenWidth = graphics.guiWidth();
-         int yOffset = 12;
+         int yOffset = ru.berdinskiybear.armorhud.ArmorHudPort.bossBarYOffset(graphics, 12);
 
          for (LerpingBossEvent event : this.events.values()) {
             int xLeft = screenWidth / 2 - 91;

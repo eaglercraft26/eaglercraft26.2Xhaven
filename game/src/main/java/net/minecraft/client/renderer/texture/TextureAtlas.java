@@ -294,6 +294,10 @@ public class TextureAtlas extends AbstractTexture implements TickableTexture, Du
       }
    }
 
+   public Map<Identifier, TextureAtlasSprite> spritesByName() {
+      return this.texturesByName;
+   }
+
    public TextureAtlasSprite missingSprite() {
       return Objects.requireNonNull(this.missingSprite, "Atlas not initialized");
    }

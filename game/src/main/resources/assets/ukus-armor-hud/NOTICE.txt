@@ -1,0 +1,5 @@
+uku's Armor HUD 0.12.0+mc26.2
+
+Originally created by BerdinskiyBear and forked by uku.
+Original project: https://github.com/uku3lig/armor-hud
+The accompanying LICENSE is the original MIT license.

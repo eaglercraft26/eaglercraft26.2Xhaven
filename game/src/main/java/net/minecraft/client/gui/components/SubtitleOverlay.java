@@ -56,6 +56,7 @@ public class SubtitleOverlay implements SoundEventListener {
          if (!this.audibleSubtitles.isEmpty()) {
             int row = 0;
             int width = 0;
+            int armorHudOffset = ru.berdinskiybear.armorhud.ArmorHudPort.subtitleYOffset(graphics);
             double displayTimeMultiplier = this.minecraft.options.notificationDisplayTime().get();
             Iterator<SubtitleOverlay.Subtitle> iterator = this.audibleSubtitles.iterator();
 
@@ -92,7 +93,10 @@ public class SubtitleOverlay implements SoundEventListener {
                      Mth.clampedLerp((float)(Util.getMillis() - closestRecentLocation.time) / (float)(3000.0 * displayTimeMultiplier), 255.0F, 75.0F)
                   );
                   graphics.pose().pushMatrix();
-                  graphics.pose().translate(graphics.guiWidth() - halfWidth * 1.0F - 2.0F, graphics.guiHeight() - 35 - row * (height + 1) * 1.0F);
+                  graphics.pose().translate(
+                     graphics.guiWidth() - halfWidth * 1.0F - 2.0F,
+                     graphics.guiHeight() - 35 - armorHudOffset - row * (height + 1) * 1.0F
+                  );
                   graphics.pose().scale(1.0F, 1.0F);
                   graphics.fill(-halfWidth - 1, -halfHeight - 1, halfWidth + 1, halfHeight + 1, this.minecraft.options.getBackgroundColor(0.8F));
                   int textColor = ARGB.color(255, brightness, brightness, brightness);

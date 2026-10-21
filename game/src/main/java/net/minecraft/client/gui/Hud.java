@@ -216,6 +216,7 @@ public class Hud {
    }
 
    public void extractRenderState(final GuiGraphicsExtractor graphics, final DeltaTracker deltaTracker) {
+      ru.berdinskiybear.armorhud.ArmorHudPort.beginFrame();
       this.minecraft.gameRenderer.gameRenderState().guiRenderState.isHudHidden = this.isHidden;
       if (!(this.minecraft.gui.screen() instanceof LevelLoadingScreen)) {
          if (!this.isHidden) {
@@ -224,6 +225,7 @@ public class Hud {
             graphics.nextStratum();
             this.extractHotbarAndDecorations(graphics, deltaTracker);
             this.extractEffects(graphics, deltaTracker);
+            ru.berdinskiybear.armorhud.ArmorHudPort.extractRenderState(graphics, deltaTracker);
             this.extractBossOverlay(graphics, deltaTracker);
          }
 
@@ -493,7 +495,7 @@ public class Hud {
             Holder<MobEffect> effect = instance.getEffect();
             if (instance.showIcon()) {
                int x = graphics.guiWidth();
-               int y = 1;
+               int y = 1 + ru.berdinskiybear.armorhud.ArmorHudPort.statusEffectYOffset(graphics);
                if (this.minecraft.isDemo()) {
                   y += 15;
                }

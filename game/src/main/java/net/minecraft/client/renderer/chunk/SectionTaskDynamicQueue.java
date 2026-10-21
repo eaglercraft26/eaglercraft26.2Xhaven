@@ -17,6 +17,8 @@ import org.jspecify.annotations.Nullable;
  * identity, and only rebuild their distance keys after the camera has moved meaningfully.
  */
 public class SectionTaskDynamicQueue {
+   private static final int MAX_PLAYER_PRIORITY_QUOTA = 4;
+   private static final int MAX_DISTANCE_PRIORITY_QUOTA = 16;
    private static final int MAX_RECOMPILE_QUOTA = 2;
    private static final double CAMERA_REWEIGHT_DISTANCE_SQR = 64.0;
    private static final int PRIORITY = 0;
@@ -25,11 +27,15 @@ public class SectionTaskDynamicQueue {
    private static final Comparator<QueuedTask> ORDER = Comparator
       .comparingDouble((QueuedTask entry) -> entry.distanceSqr)
       .thenComparingLong(entry -> entry.sequence);
+   private static final Comparator<QueuedTask> AGE_ORDER = Comparator.comparingLong(entry -> entry.sequence);
 
    private final PriorityQueue<QueuedTask> priorityTasks = new PriorityQueue<>(ORDER);
    private final PriorityQueue<QueuedTask> initialTasks = new PriorityQueue<>(ORDER);
    private final PriorityQueue<QueuedTask> recompileTasks = new PriorityQueue<>(ORDER);
+   private final PriorityQueue<QueuedTask> oldestRegularTasks = new PriorityQueue<>(AGE_ORDER);
    private final Map<SectionRenderDispatcher.RenderSection.SectionTask, QueuedTask> entries = new IdentityHashMap<>();
+   private int playerPriorityQuota = MAX_PLAYER_PRIORITY_QUOTA;
+   private int distancePriorityQuota = MAX_DISTANCE_PRIORITY_QUOTA;
    private int recompileQuota = MAX_RECOMPILE_QUOTA;
    private long nextSequence;
    private @Nullable Vec3 weightedCamera;
@@ -46,23 +52,43 @@ public class SectionTaskDynamicQueue {
       );
       this.entries.put(task, entry);
       this.queueFor(queueType).add(entry);
+      if (queueType != PRIORITY) {
+         this.oldestRegularTasks.add(entry);
+      }
    }
 
    public synchronized SectionRenderDispatcher.RenderSection.@Nullable SectionTask poll(final Vec3 cameraPos) {
       this.reweightIfNeeded(cameraPos);
 
-      QueuedTask selected = this.pollValid(this.priorityTasks);
-      if (selected == null) {
-         QueuedTask initial = this.peekValid(this.initialTasks);
-         QueuedTask recompile = this.peekValid(this.recompileTasks);
-         if (recompile == null || initial != null
-            && (this.recompileQuota <= 0 || !(recompile.distanceSqr < initial.distanceSqr))) {
-            this.recompileQuota = MAX_RECOMPILE_QUOTA;
-            selected = this.pollValid(this.initialTasks);
+      QueuedTask priority = this.peekValid(this.priorityTasks);
+      QueuedTask initial = this.peekValid(this.initialTasks);
+      QueuedTask recompile = this.peekValid(this.recompileTasks);
+      boolean regularWorkAvailable = initial != null || recompile != null;
+      QueuedTask selected;
+      if (priority != null && (this.playerPriorityQuota > 0 || !regularWorkAvailable)) {
+         this.playerPriorityQuota--;
+         selected = this.pollValid(this.priorityTasks);
+      } else if (regularWorkAvailable) {
+         this.playerPriorityQuota = MAX_PLAYER_PRIORITY_QUOTA;
+         QueuedTask oldest = this.peekOldestRegular();
+         if (oldest != null && this.distancePriorityQuota <= 0) {
+            this.oldestRegularTasks.poll();
+            this.queueFor(oldest.queueType).remove(oldest);
+            this.distancePriorityQuota = MAX_DISTANCE_PRIORITY_QUOTA;
+            selected = oldest;
          } else {
-            this.recompileQuota--;
-            selected = this.pollValid(this.recompileTasks);
+            this.distancePriorityQuota--;
+            if (recompile == null || initial != null
+               && (this.recompileQuota <= 0 || !(recompile.distanceSqr < initial.distanceSqr))) {
+               this.recompileQuota = MAX_RECOMPILE_QUOTA;
+               selected = this.pollValid(this.initialTasks);
+            } else {
+               this.recompileQuota--;
+               selected = this.pollValid(this.recompileTasks);
+            }
          }
+      } else {
+         selected = this.pollValid(this.priorityTasks);
       }
 
       if (selected != null) {
@@ -94,6 +120,7 @@ public class SectionTaskDynamicQueue {
       this.priorityTasks.clear();
       this.initialTasks.clear();
       this.recompileTasks.clear();
+      this.oldestRegularTasks.clear();
       for (SectionRenderDispatcher.RenderSection.SectionTask task : pending) {
          task.cancel();
       }
@@ -136,11 +163,26 @@ public class SectionTaskDynamicQueue {
          if (entry == null) {
             return null;
          }
-         if (!entry.task.isCancelled.get() && !entry.task.isCompleted.get()) {
+         if (this.entries.get(entry.task) == entry && !entry.task.isCancelled.get() && !entry.task.isCompleted.get()) {
             return entry;
          }
          queue.poll();
-         this.entries.remove(entry.task);
+         if (this.entries.get(entry.task) == entry) {
+            this.entries.remove(entry.task);
+         }
+      }
+   }
+
+   private @Nullable QueuedTask peekOldestRegular() {
+      while (true) {
+         QueuedTask entry = this.oldestRegularTasks.peek();
+         if (entry == null) {
+            return null;
+         }
+         if (this.entries.get(entry.task) == entry && !entry.task.isCancelled.get() && !entry.task.isCompleted.get()) {
+            return entry;
+         }
+         this.oldestRegularTasks.poll();
       }
    }
 

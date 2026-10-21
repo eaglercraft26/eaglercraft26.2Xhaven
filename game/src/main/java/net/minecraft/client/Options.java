@@ -77,6 +77,9 @@ import org.slf4j.Logger;
 public class Options {
    private static final Logger LOGGER = LogUtils.getLogger();
    private static final Gson GSON = new Gson();
+   private static final KeyMapping.Category UKUS_ARMOR_HUD = KeyMapping.Category.register(
+      net.minecraft.resources.Identifier.fromNamespaceAndPath("ukus-armor-hud", "key")
+   );
    public static final int RENDER_DISTANCE_SHORT = 4;
    public static final int RENDER_DISTANCE_FAR = 12;
    public static final int RENDER_DISTANCE_REALLY_FAR = 16;
@@ -255,6 +258,13 @@ public class Options {
       operateOnLevelExtractor(LevelExtractor::allChanged);
       this.setGraphicsPresetToCustom();
    });
+   private static final Component GRAPHICS_TOOLTIP_ENTITY_OCCLUSION_CULLING = Component.translatable("options.entityOcclusionCulling.tooltip");
+   private final OptionInstance<Boolean> entityOcclusionCulling = OptionInstance.createBoolean(
+      "options.entityOcclusionCulling",
+      OptionInstance.cachedConstantTooltip(GRAPHICS_TOOLTIP_ENTITY_OCCLUSION_CULLING),
+      true,
+      OptionInstance.NO_ACTION
+   );
    private static final Component GRAPHICS_TOOLTIP_CHUNK_FADE = Component.translatable("options.chunkFade.tooltip");
    private final OptionInstance<Double> chunkSectionFadeInTime = new OptionInstance<>(
       "options.chunkFade",
@@ -284,7 +294,7 @@ public class Options {
       PrioritizeChunkUpdates.NONE,
       var1 -> this.setGraphicsPresetToCustom()
    );
-   public List<String> resourcePacks = Lists.newArrayList();
+   public List<String> resourcePacks = Lists.newArrayList("default");
    public List<String> incompatibleResourcePacks = Lists.newArrayList();
    private final OptionInstance<ChatVisiblity> chatVisibility = new OptionInstance<>(
       "options.chat.visibility",
@@ -709,6 +719,7 @@ public class Options {
    public final KeyMapping keyQuickActions = new KeyMapping("key.quickActions", 71, KeyMapping.Category.MISC);
    public final KeyMapping keyToggleGui = new KeyMapping("key.toggleGui", 290, KeyMapping.Category.MISC);
    public final KeyMapping keyToggleSpectatorShaderEffects = new KeyMapping("key.toggleSpectatorShaderEffects", 293, KeyMapping.Category.MISC);
+   public final KeyMapping keyArmorHud = new KeyMapping("armorhud.keybind.toggle", InputConstants.UNKNOWN.getValue(), UKUS_ARMOR_HUD);
    public final KeyMapping[] keyHotbarSlots = new KeyMapping[]{
       new KeyMapping("key.hotbar.1", 49, KeyMapping.Category.INVENTORY),
       new KeyMapping("key.hotbar.2", 50, KeyMapping.Category.INVENTORY),
@@ -797,6 +808,7 @@ public class Options {
             this.keySocialInteractions,
             this.keyToggleGui,
             this.keyToggleSpectatorShaderEffects,
+            this.keyArmorHud,
             this.keyScreenshot,
             this.keyTogglePerspective,
             this.keySmoothCamera,
@@ -1106,6 +1118,10 @@ public class Options {
 
    public OptionInstance<Boolean> ambientOcclusion() {
       return this.ambientOcclusion;
+   }
+
+   public OptionInstance<Boolean> entityOcclusionCulling() {
+      return this.entityOcclusionCulling;
    }
 
    public OptionInstance<Double> chunkSectionFadeInTime() {
@@ -1597,6 +1613,7 @@ public class Options {
       access.process("screenEffectScale", this.screenEffectScale);
       access.process("soundDevice", this.soundDevice);
       access.process("vignette", this.vignette);
+      access.process("entityOcclusionCulling", this.entityOcclusionCulling);
       access.process("weatherRadius", this.weatherRadius);
    }
 

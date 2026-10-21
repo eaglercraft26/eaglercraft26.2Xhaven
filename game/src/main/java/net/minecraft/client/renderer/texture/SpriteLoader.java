@@ -129,7 +129,17 @@ public class SpriteLoader {
          SpriteResourceLoader spriteResourceLoader = SpriteResourceLoader.create(additionalMetadata);
          CompletableFuture<SpriteLoader.Preparations> result = CompletableFuture.<List<SpriteSource.Loader>>supplyAsync(
                () -> SpriteSourceList.load(manager, atlasInfoLocation).list(manager), taskExecutor)
-            .thenCompose(sprites -> runSpriteSuppliers(spriteResourceLoader, (List<SpriteSource.Loader>)sprites, taskExecutor))
+            .thenCompose(sprites -> {
+               List<SpriteSource.Loader> loaders = new java.util.ArrayList<>((List<SpriteSource.Loader>)sprites);
+               if (TextureAtlas.LOCATION_BLOCKS.equals(this.location)) {
+                  net.minecraft.client.renderer.block.ConnectedTextures.addSpriteLoaders(
+                     manager,
+                     (spriteId, resource) -> loader -> loader.loadSprite(spriteId, resource),
+                     loaders
+                  );
+               }
+               return runSpriteSuppliers(spriteResourceLoader, loaders, taskExecutor);
+            })
             .thenApply(resources -> this.stitch((List<SpriteContents>)resources, maxMipmapLevels, taskExecutor));
          CompletableFuture<SpriteLoader.Preparations> gated = result.handle((value, failure) -> {
             return EaglerModResourceModelProbe.awaitPerformanceDecodeFinish(telemetryBatch).handle((ignored, barrierFailure) -> {

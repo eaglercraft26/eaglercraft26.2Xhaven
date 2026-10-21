@@ -51,6 +51,11 @@ dependencies {
 	implementation("org.jspecify:jspecify:1.0.0")
 	implementation("org.slf4j:slf4j-api:2.0.17")
 
+	testImplementation(platform("org.junit:junit-bom:5.10.2"))
+	testImplementation("org.junit.jupiter:junit-jupiter")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+
 	// Compile-time only: referenced by decompiled sources, not shipped at runtime
 	compileOnly("org.jetbrains:annotations:26.0.2")
 	compileOnly("org.teavm:teavm-interop:0.13.1")
@@ -85,6 +90,10 @@ dependencies {
 	runtimeOnly("org.lwjgl:lwjgl-stb:3.4.1:natives-linux")
 	runtimeOnly("org.lwjgl:lwjgl-tinyfd:3.4.1:natives-linux")
 	runtimeOnly("org.lwjgl:lwjgl-vma:3.4.1:natives-linux")
+}
+
+tasks.test {
+	useJUnitPlatform()
 }
 
 tasks.register<JavaExec>("eaglerServerPausePolicyTest") {

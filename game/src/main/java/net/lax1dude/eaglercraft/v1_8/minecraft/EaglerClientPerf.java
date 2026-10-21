@@ -17,6 +17,8 @@ public final class EaglerClientPerf {
 	private static long limiterNanos;
 	private static long frameNanos;
 	private static long frameMaxNanos;
+	private static long terrainUploadBytes;
+	private static long terrainUploadCopies;
 	private static long snapshots;
 	private static long snapshotCaptureNanos;
 	private static long snapshotEncodeNanos;
@@ -202,6 +204,9 @@ public final class EaglerClientPerf {
 					millis(renderNanos / count), millis(presentNanos / count), millis(limiterNanos / count), snapshots,
 					millis(snapshotCaptureNanos / snapshotCount), millis(snapshotEncodeNanos / snapshotCount), inlineCompiles,
 					millis(inlineCompileNanos / inlineCount), millis(inlineCompileMaxNanos));
+			if (terrainUploadCopies != 0L) {
+				LOGGER.info("[EagPerfClient] terrain upload bytes={} copies={}", terrainUploadBytes, terrainUploadCopies);
+			}
 			if (clientWorkSamples != 0L) {
 				LOGGER.info("[EagPerfClient] pre-frame samples={} packet avg/max={}/{}ms tasks={}ms ticks={}ms loop avg/max={}/{}ms",
 						clientWorkSamples, millis(packetNanos / clientWorkSamples), millis(packetMaxNanos),
@@ -324,6 +329,7 @@ public final class EaglerClientPerf {
 			}
 			windowStarted = now;
 			frames = extractNanos = renderNanos = presentNanos = limiterNanos = frameNanos = frameMaxNanos = 0L;
+			terrainUploadBytes = terrainUploadCopies = 0L;
 			snapshots = snapshotCaptureNanos = snapshotEncodeNanos = 0L;
 			inlineCompiles = inlineCompileNanos = inlineCompileMaxNanos = 0L;
 			clientWorkSamples = packetNanos = packetMaxNanos = taskNanos = tickNanos = loopNanos = loopMaxNanos = 0L;
@@ -371,6 +377,14 @@ public final class EaglerClientPerf {
 				actionSent[i] = actionResponses[i] = actionResponseNanos[i] = actionResponseMaxNanos[i] = 0L;
 			}
 		}
+	}
+
+	public static void terrainUpload(final long bytes, final long copies) {
+		if (!enabled) {
+			return;
+		}
+		terrainUploadBytes += Math.max(0L, bytes);
+		terrainUploadCopies += Math.max(0L, copies);
 	}
 
 	public static void earlyParticlePacket(final boolean admitted, final int bytes) {

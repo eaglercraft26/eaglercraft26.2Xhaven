@@ -81,6 +81,7 @@ import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.lax1dude.eaglercraft.v1_8.mesh.MeshWorkerRuntime;
 import net.lax1dude.eaglercraft.v1_8.mesh.ModelTableCodec;
 import com.mojang.logging.LogUtils;
@@ -88,6 +89,7 @@ import org.slf4j.Logger;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.material.FogType;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix4f;
 import org.joml.Matrix4fStack;
@@ -122,6 +124,8 @@ public class LevelRenderer implements AutoCloseable {
    private final SectionOcclusionGraph sectionOcclusionGraph = new SectionOcclusionGraph();
    private final ObjectArrayList<SectionRenderDispatcher.RenderSection> visibleSections = new ObjectArrayList(10000);
    private final ObjectArrayList<SectionRenderDispatcher.RenderSection> nearbyVisibleSections = new ObjectArrayList(50);
+   private boolean entityOcclusionCullingEnabled = true;
+   private final RenderCullingStats renderCullingStats = new RenderCullingStats();
    private @Nullable ViewArea viewArea;
    private static final Logger MESH_LOGGER = LogUtils.getLogger();
    private final RenderTarget entityOutlineTarget;
@@ -139,6 +143,13 @@ public class LevelRenderer implements AutoCloseable {
    private @Nullable GpuSampler chunkLayerSampler;
    private final SimpleGizmoCollector renderThreadGizmos = new SimpleGizmoCollector();
    private LevelRenderer.FinalizedGizmos finalizedGizmos = new LevelRenderer.FinalizedGizmos(new DrawableGizmoPrimitives(), new DrawableGizmoPrimitives());
+
+   public static final class RenderCullingStats {
+      public int entityChecks;
+      public int entitiesCulled;
+      public int blockEntityChecks;
+      public int blockEntitiesCulled;
+   }
 
    public LevelRenderer(
       final EntityRenderDispatcher entityRenderDispatcher,
@@ -189,6 +200,7 @@ public class LevelRenderer implements AutoCloseable {
       final ProfilerFiller profiler = Profiler.get();
       profiler.push("repositionCamera");
       this.repositionCamera(cameraState);
+      this.entityOcclusionCullingEnabled = Minecraft.getInstance().options.entityOcclusionCulling().get();
       Matrix4fStack modelViewStack = RenderSystem.getModelViewStack();
       modelViewStack.pushMatrix();
       modelViewStack.mul(modelViewMatrix);
@@ -679,13 +691,8 @@ public class LevelRenderer implements AutoCloseable {
       BlockPos cameraPosition = camera.blockPos;
       long fadeDuration = Mth.floor(this.optionsRenderState.chunkSectionFadeInTime * 1000.0);
 
-      // Phase C tuning (Workstream A2): when the worker pool is live, compile at most one
-      // player-affected section INLINE in a single frame — a block break dirties
-      // the hit section plus its neighbours, and baking them all inline this frame is exactly the
-      // reported freeze. The overflow is offloaded to the pool instead (its distance-priority poll
-      // still serves these nearest sections first, so they land ~1-2 frames later, no stall). When
-      // the pool is not ready this stays the stock inline path (nothing to offload to).
-      boolean meshPoolReady = MeshWorkerRuntime.isReady();
+      // Synchronous compiles bypass the dispatcher's async-work budget. Keep chunk-load
+      // and edit bursts bounded even when browser workers are unavailable.
       int inlineSyncThisFrame = 0;
 
       try {
@@ -708,7 +715,7 @@ public class LevelRenderer implements AutoCloseable {
             }
 
             section.setWasPreviouslyEmpty(false);
-            if (rebuildSync && (!meshPoolReady || (state.playerChanged() && inlineSyncThisFrame < MAX_INLINE_SYNC_PER_FRAME))) {
+            if (rebuildSync && inlineSyncThisFrame < MAX_INLINE_SYNC_PER_FRAME) {
                profiler.push("compileSectionSynchronously");
                section.compileSync(state.region());
                profiler.pop();
@@ -737,6 +744,80 @@ public class LevelRenderer implements AutoCloseable {
       }
    }
 
+   public void setEntityOcclusionCullingEnabled(final boolean enabled) {
+      this.entityOcclusionCullingEnabled = enabled;
+      if (!enabled) {
+         this.renderCullingStats.entityChecks = 0;
+         this.renderCullingStats.entitiesCulled = 0;
+         this.renderCullingStats.blockEntityChecks = 0;
+         this.renderCullingStats.blockEntitiesCulled = 0;
+      }
+   }
+
+   public boolean isEntityOcclusionCullingEnabled() {
+      return this.entityOcclusionCullingEnabled;
+   }
+
+   public RenderCullingStats getRenderCullingStats() {
+      return this.renderCullingStats;
+   }
+
+   private boolean shouldRenderEntity(final EntityRenderState state, final CameraRenderState camera) {
+      if (!this.entityOcclusionCullingEnabled) {
+         return true;
+      }
+      this.renderCullingStats.entityChecks++;
+      double halfWidth = Math.max(0.25D, state.boundingBoxWidth * 0.5D);
+      double halfHeight = Math.max(0.25D, state.boundingBoxHeight * 0.5D);
+      AABB bounds = new AABB(
+         state.x - halfWidth,
+         state.y,
+         state.z - halfWidth,
+         state.x + halfWidth,
+         state.y + halfHeight,
+         state.z + halfWidth
+      );
+      if (!camera.cullFrustum.isVisible(bounds)) {
+         this.renderCullingStats.entitiesCulled++;
+         return false;
+      }
+
+      ClientLevel level = Minecraft.getInstance().level;
+      if (level == null) {
+         return true;
+      }
+
+      if (WorldOcclusionHelper.isOccludedByWorld(camera.pos, bounds, pos -> WorldOcclusionHelper.isSolidBlocking(level.getBlockState(pos)))) {
+         this.renderCullingStats.entitiesCulled++;
+         return false;
+      }
+      return true;
+   }
+
+   private boolean shouldRenderBlockEntity(final BlockEntityRenderState renderState, final CameraRenderState camera) {
+      if (!this.entityOcclusionCullingEnabled) {
+         return true;
+      }
+      this.renderCullingStats.blockEntityChecks++;
+      BlockPos blockPos = renderState.blockPos;
+      AABB bounds = new AABB(blockPos.getX(), blockPos.getY(), blockPos.getZ(), blockPos.getX() + 1.0D, blockPos.getY() + 1.0D, blockPos.getZ() + 1.0D);
+      if (!camera.cullFrustum.isVisible(bounds)) {
+         this.renderCullingStats.blockEntitiesCulled++;
+         return false;
+      }
+
+      ClientLevel level = Minecraft.getInstance().level;
+      if (level == null) {
+         return true;
+      }
+
+      if (WorldOcclusionHelper.isOccludedByWorld(camera.pos, bounds, pos -> WorldOcclusionHelper.isSolidBlocking(level.getBlockState(pos)))) {
+         this.renderCullingStats.blockEntitiesCulled++;
+         return false;
+      }
+      return true;
+   }
+
    private void submitEntities(final PoseStack poseStack, final LevelRenderState levelRenderState, final SubmitNodeCollector output) {
       Vec3 cameraPos = levelRenderState.cameraRenderState.pos;
       double camX = cameraPos.x();
@@ -744,6 +825,9 @@ public class LevelRenderer implements AutoCloseable {
       double camZ = cameraPos.z();
 
       for (EntityRenderState state : levelRenderState.entityRenderStates) {
+         if (!this.shouldRenderEntity(state, levelRenderState.cameraRenderState)) {
+            continue;
+         }
          this.entityRenderDispatcher.submit(state, levelRenderState.cameraRenderState, state.x - camX, state.y - camY, state.z - camZ, poseStack, output);
       }
    }
@@ -755,6 +839,9 @@ public class LevelRenderer implements AutoCloseable {
       double camZ = cameraPos.z();
 
       for (BlockEntityRenderState renderState : levelRenderState.blockEntityRenderStates) {
+         if (!this.shouldRenderBlockEntity(renderState, levelRenderState.cameraRenderState)) {
+            continue;
+         }
          BlockPos blockPos = renderState.blockPos;
          poseStack.pushPose();
          poseStack.translate(blockPos.getX() - camX, blockPos.getY() - camY, blockPos.getZ() - camZ);

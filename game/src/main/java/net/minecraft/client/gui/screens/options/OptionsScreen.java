@@ -82,6 +82,9 @@ public class OptionsScreen extends Screen implements HasGamemasterPermissionReac
       );
       helper.addChild(this.openScreenButton(ACCESSIBILITY, () -> new AccessibilityOptionsScreen(this, this.options)));
       helper.addChild(this.openScreenButton(CREDITS_AND_ATTRIBUTION, () -> new CreditsAndAttributionScreen(this)));
+      helper.addChild(
+         this.openScreenButton(Component.translatable("armorhud.config"), () -> new ru.berdinskiybear.armorhud.ArmorHudConfigScreen(this))
+      );
       this.layout.addToContents(gridLayout);
       this.layout.addToFooter(Button.builder(CommonComponents.GUI_DONE, button -> this.onClose()).width(200).build());
       this.layout.visitWidgets(x$0 -> this.addRenderableWidget(x$0));

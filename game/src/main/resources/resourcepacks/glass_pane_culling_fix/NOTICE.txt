@@ -1,0 +1,6 @@
+This pack contains the glass-pane-culling-fix resource pack from Continuity
+3.0.1 for Minecraft 26.2, by PepperCode1.
+
+Upstream project: https://github.com/PepperCode1/Continuity
+The pack's source models are included in this directory.
+The applicable LGPL-3.0 license text is in licenses/LGPL-3.0.txt.

@@ -83,6 +83,7 @@ public class VideoSettingsScreen extends OptionsSubScreen {
          options.showAutosaveIndicator(),
          options.showPerformanceCounters(),
          options.vignette(),
+         options.entityOcclusionCulling(),
          options.attackIndicator(),
          options.chunkSectionFadeInTime()
       };

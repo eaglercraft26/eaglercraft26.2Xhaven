@@ -12,6 +12,8 @@ import org.lwjgl.system.MemoryUtil;
 public abstract class StagingBuffer implements AutoCloseable {
    private int nextWriteOffset;
    private int usedBufferCount;
+   private long uploadedBytes;
+   private long uploadCount;
 
    public static StagingBuffer create(final String name, final GpuDevice gpuDevice, final int bufferSize) {
       return gpuDevice.getDeviceInfo().hintsAndWorkarounds().writeToBufferIsSlow() && gpuDevice.getDeviceInfo().features().persistentMapping()
@@ -46,6 +48,14 @@ public abstract class StagingBuffer implements AutoCloseable {
 
    public StagingBuffer.Uploader startUploading(final CommandEncoder encoder) {
       return new StagingBuffer.Uploader(encoder);
+   }
+
+   public long uploadedBytes() {
+      return this.uploadedBytes;
+   }
+
+   public long uploadCount() {
+      return this.uploadCount;
    }
 
    private void tryClearAndRotate() {
@@ -163,6 +173,8 @@ public abstract class StagingBuffer implements AutoCloseable {
       public void copyTo(final StagingBuffer.BufferHandle srcBuffer, final GpuBuffer dstBuffer, final long dstOffset) {
          srcBuffer.checkValidFor(StagingBuffer.this);
          StagingBuffer.this.copyTo(this.encoder, dstBuffer, dstOffset, srcBuffer.offset, srcBuffer.size);
+         StagingBuffer.this.uploadedBytes += srcBuffer.size;
+         StagingBuffer.this.uploadCount++;
       }
 
       @Override

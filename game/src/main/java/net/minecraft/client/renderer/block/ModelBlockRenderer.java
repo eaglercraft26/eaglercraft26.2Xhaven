@@ -9,6 +9,8 @@ import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -61,11 +63,12 @@ public class ModelBlockRenderer {
       model.collectParts(this.random, this.parts);
       if (!this.parts.isEmpty()) {
          try {
+            ConnectedTextures.Cache connectedTextures = ConnectedTextures.createCache(level, blockState, pos);
             Vec3 offset = blockState.getOffset(pos);
             if (this.ambientOcclusion && blockState.getLightEmission() == 0 && ((BlockStateModelPart)this.parts.getFirst()).useAmbientOcclusion()) {
-               this.tesselateAmbientOcclusion(output, x + (float)offset.x, y + (float)offset.y, z + (float)offset.z, this.parts, level, blockState, pos);
+               this.tesselateAmbientOcclusion(output, x + (float)offset.x, y + (float)offset.y, z + (float)offset.z, this.parts, level, blockState, pos, connectedTextures);
             } else {
-               this.tesselateFlat(output, x + (float)offset.x, y + (float)offset.y, z + (float)offset.z, this.parts, level, blockState, pos);
+               this.tesselateFlat(output, x + (float)offset.x, y + (float)offset.y, z + (float)offset.z, this.parts, level, blockState, pos, connectedTextures);
             }
          } finally {
             this.parts.clear();
@@ -103,7 +106,8 @@ public class ModelBlockRenderer {
       final List<BlockStateModelPart> parts,
       final BlockAndTintGetter level,
       final BlockState state,
-      final BlockPos pos
+      final BlockPos pos,
+      final ConnectedTextures.Cache connectedTextures
    ) {
       int cacheValid = 0;
       int shouldRenderFaceCache = 0;
@@ -127,7 +131,7 @@ public class ModelBlockRenderer {
                   if (shouldRenderFace) {
                      for (BakedQuad quad : culledQuads) {
                         this.lighter.prepareQuadAmbientOcclusion(level, state, pos, quad, this.quadInstance);
-                        this.putQuadWithTint(output, x, y, z, level, state, pos, quad);
+                        this.putQuadWithTint(output, x, y, z, level, state, pos, connectedTextures, quad);
                      }
                   }
                }
@@ -136,7 +140,7 @@ public class ModelBlockRenderer {
 
          for (BakedQuad quad : part.getQuads(null)) {
             this.lighter.prepareQuadAmbientOcclusion(level, state, pos, quad, this.quadInstance);
-            this.putQuadWithTint(output, x, y, z, level, state, pos, quad);
+            this.putQuadWithTint(output, x, y, z, level, state, pos, connectedTextures, quad);
          }
       }
    }
@@ -149,7 +153,8 @@ public class ModelBlockRenderer {
       final List<BlockStateModelPart> parts,
       final BlockAndTintGetter level,
       final BlockState state,
-      final BlockPos pos
+      final BlockPos pos,
+      final ConnectedTextures.Cache connectedTextures
    ) {
       int cacheValid = 0;
       int shouldRenderFaceCache = 0;
@@ -176,7 +181,7 @@ public class ModelBlockRenderer {
 
                      for (BakedQuad quad : culledQuads) {
                         this.lighter.prepareQuadFlat(level, state, pos, lightCoords, quad, this.quadInstance);
-                        this.putQuadWithTint(output, x, y, z, level, state, pos, quad);
+                        this.putQuadWithTint(output, x, y, z, level, state, pos, connectedTextures, quad);
                      }
                   }
                }
@@ -185,7 +190,7 @@ public class ModelBlockRenderer {
 
          for (BakedQuad quad : part.getQuads(null)) {
             this.lighter.prepareQuadFlat(level, state, pos, -1, quad, this.quadInstance);
-            this.putQuadWithTint(output, x, y, z, level, state, pos, quad);
+            this.putQuadWithTint(output, x, y, z, level, state, pos, connectedTextures, quad);
          }
       }
    }
@@ -207,15 +212,37 @@ public class ModelBlockRenderer {
       final BlockAndTintGetter level,
       final BlockState state,
       final BlockPos pos,
+      final ConnectedTextures.Cache connectedTextures,
       BakedQuad quad
    ) {
-      quad = ConnectedTextures.apply(level, state, pos, quad);
+      quad = ConnectedTextures.apply(connectedTextures, quad);
       int tintIndex = quad.materialInfo().tintIndex();
       if (tintIndex != -1) {
          this.quadInstance.multiplyColor(this.getTintColor(level, state, pos, tintIndex));
       }
 
       output.put(x, y, z, quad, this.quadInstance);
+      TextureAtlasSprite emissiveSprite = ConnectedTextures.emissiveSprite(quad.materialInfo().sprite());
+      if (emissiveSprite != null) {
+         BakedQuad emissiveQuad = ConnectedTextures.remapToSprite(quad, emissiveSprite);
+         BakedQuad.MaterialInfo material = quad.materialInfo();
+         emissiveQuad = new BakedQuad(
+            emissiveQuad.position0(), emissiveQuad.position1(), emissiveQuad.position2(), emissiveQuad.position3(),
+            emissiveQuad.packedUV0(), emissiveQuad.packedUV1(), emissiveQuad.packedUV2(), emissiveQuad.packedUV3(),
+            emissiveQuad.direction(),
+            new BakedQuad.MaterialInfo(emissiveSprite, ChunkSectionLayer.byTransparency(emissiveSprite.transparency()),
+               material.itemRenderType(), material.tintIndex(), material.shade(), 15)
+         );
+         int[] previousLight = new int[4];
+         for (int i = 0; i < 4; ++i) {
+            previousLight[i] = this.quadInstance.getLightCoords(i);
+         }
+         this.quadInstance.setLightCoords(15728880);
+         output.put(x, y, z, emissiveQuad, this.quadInstance);
+         for (int i = 0; i < 4; ++i) {
+            this.quadInstance.setLightCoords(i, previousLight[i]);
+         }
+      }
    }
 
    private int getTintColor(final BlockAndTintGetter level, final BlockState state, final BlockPos pos, final int tintIndex) {

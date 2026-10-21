@@ -3,8 +3,11 @@ package net.minecraft.client.resources;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import net.minecraft.SharedConstants;
@@ -14,6 +17,7 @@ import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.VanillaPackResources;
 import net.minecraft.server.packs.VanillaPackResourcesBuilder;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
@@ -32,7 +36,10 @@ public class ClientPackSource extends BuiltInPackSource {
    private static final ResourceMetadata BUILT_IN_METADATA = ResourceMetadata.of(PackMetadataSection.CLIENT_TYPE, VERSION_METADATA_SECTION);
    public static final String HIGH_CONTRAST_PACK = "high_contrast";
    private static final Map<String, Component> SPECIAL_PACK_NAMES = Map.of(
-      "programmer_art", Component.translatable("resourcePack.programmer_art.name"), "high_contrast", Component.translatable("resourcePack.high_contrast.name")
+      "programmer_art", Component.translatable("resourcePack.programmer_art.name"),
+      "high_contrast", Component.translatable("resourcePack.high_contrast.name"),
+      "default", Component.literal("Continuity: Default Connected Textures"),
+      "glass_pane_culling_fix", Component.literal("Continuity: Glass Pane Culling Fix")
    );
    private static final PackLocationInfo VANILLA_PACK_INFO = new PackLocationInfo(
       "vanilla", Component.translatable("resourcePack.vanilla.name"), PackSource.BUILT_IN, Optional.of(CORE_PACK_INFO)
@@ -109,5 +116,47 @@ public class ClientPackSource extends BuiltInPackSource {
       if (this.externalAssetDir != null) {
          this.discoverPacksInPath(this.externalAssetDir, discoveredPacks);
       }
+      if (net.lax1dude.eaglercraft.v1_8.minecraft.EaglerHosted.isActive()
+            && net.lax1dude.eaglercraft.v1_8.minecraft.EaglerHosted.webAssetMapSupplier != null) {
+         Map<String, byte[]> assets = net.lax1dude.eaglercraft.v1_8.minecraft.EaglerHosted.webAssetMapSupplier.get();
+         this.addEmbeddedPack("default", assets, discoveredPacks);
+         this.addEmbeddedPack("glass_pane_culling_fix", assets, discoveredPacks);
+      }
+   }
+
+   private void addEmbeddedPack(final String id, final Map<String, byte[]> allAssets,
+      final BiConsumer<String, Function<String, Pack>> discoveredPacks) {
+      String prefix = "resourcepacks/" + id + "/";
+      Map<String, byte[]> packAssets = new HashMap<>();
+      Set<String> namespaces = new HashSet<>();
+      for (Map.Entry<String, byte[]> entry : allAssets.entrySet()) {
+         if (entry.getKey().startsWith(prefix)) {
+            String packPath = entry.getKey().substring(prefix.length());
+            packAssets.put(packPath, entry.getValue());
+            if (packPath.startsWith("assets/")) {
+               int namespaceEnd = packPath.indexOf('/', "assets/".length());
+               if (namespaceEnd > "assets/".length()) {
+                  namespaces.add(packPath.substring("assets/".length(), namespaceEnd));
+               }
+            }
+         }
+      }
+      if (packAssets.isEmpty()) {
+         return;
+      }
+      Pack.ResourcesSupplier resources = new Pack.ResourcesSupplier() {
+         @Override
+         public PackResources openPrimary(final PackLocationInfo location) {
+            return new net.lax1dude.eaglercraft.v1_8.minecraft.EaglerEPKPackResources(
+               location, ResourceMetadata.EMPTY, Set.copyOf(namespaces), packAssets
+            );
+         }
+
+         @Override
+         public PackResources openFull(final PackLocationInfo location, final Pack.Metadata metadata) {
+            return this.openPrimary(location);
+         }
+      };
+      discoveredPacks.accept(id, packId -> this.createBuiltinPack(packId, resources, this.getPackTitle(packId)));
    }
 }

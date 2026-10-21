@@ -6082,6 +6082,8 @@
   "options.eaglerTouchControls.tooltip": "Shows and uses the on-screen movement and action controls on touch devices. Touch menus and the on-screen keyboard remain available when this is off.",
   "options.eaglerPerformanceCounters": "Show FPS & TPS",
   "options.entityDistanceScaling": "Entity Distance",
+  "options.entityOcclusionCulling": "Entity Occlusion Culling",
+  "options.entityOcclusionCulling.tooltip": "Hide entities and block entities when the camera ray is fully blocked by solid world geometry.",
   "options.entityShadows": "Entity Shadows",
   "options.exclusiveFullscreen": "Exclusive Fullscreen",
   "options.exclusiveFullscreen.off.tooltip": "All input methods are expected to work in this fullscreen mode, but adaptive sync (Nvidia G-Sync, AMD FreeSync) will not work.",

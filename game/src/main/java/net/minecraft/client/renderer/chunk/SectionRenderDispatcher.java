@@ -66,6 +66,8 @@ public class SectionRenderDispatcher {
    private final AtomicReference<Vec3> cameraPosition = new AtomicReference<>(Vec3.ZERO);
    private volatile SectionCompiler sectionCompiler;
    private final StagingBuffer stagingBuffer;
+   private long lastReportedUploadBytes;
+   private long lastReportedUploadCount;
    private final Map<ChunkSectionLayer, SectionRenderDispatcher.SectionUberBuffers> chunkUberBuffers;
    private final ReentrantLock copyLock = new ReentrantLock();
    // ==== Mesh-worker plan Phase C (design doc §4.2/§3.3) ====
@@ -101,6 +103,7 @@ public class SectionRenderDispatcher {
    private int frameSnapshots;
    private int frameInstalls;
 	private int frameAsyncInline;
+	private boolean asyncInlineCompileInFlight;
 	private int frameSnapshotLimit = MAX_SNAPSHOTS_PER_FRAME;
 	private int frameInstallLimit = MAX_INSTALLS_PER_FRAME;
 	private int frameAsyncInlineLimit = MAX_ASYNC_INLINE_PER_FRAME;
@@ -226,11 +229,6 @@ public class SectionRenderDispatcher {
                      this.queue.add(task); // every worker at cap — retry when a slot frees on return
                      return;
                   }
-				  if (this.frameAsyncInline >= this.frameAsyncInlineLimit || this.frameBudgetRemainingMs <= 0.0) {
-					 this.queue.add(task);
-					 return;
-				  }
-				  budgetInlineCompile = true;
                   // DISPATCH_INLINE (fluid/cancelled/error): fall through to the stock path below.
                } else {
                   // Pool installed but still warming up (or disabled after a crash): this async
@@ -239,8 +237,16 @@ public class SectionRenderDispatcher {
                }
             }
 
+			if (task instanceof SectionRenderDispatcher.RenderSection.CompileTask) {
+				if (!this.reserveAsyncInlineCompile()) {
+					this.queue.add(task);
+					return;
+				}
+				budgetInlineCompile = true;
+			}
+
+			double inlineStarted = budgetInlineCompile ? meshNowMs() : 0.0;
             try {
-			   double inlineStarted = budgetInlineCompile ? meshNowMs() : 0.0;
                SectionBufferBuilderPack buffer = Objects.requireNonNull(this.bufferPool.acquire());
                SectionRenderDispatcher.RenderSection.SectionTask.SectionTaskResult result = task.doTask(buffer);
                task.isCompleted.set(true);
@@ -254,22 +260,37 @@ public class SectionRenderDispatcher {
                }
 
                this.bufferPool.release(buffer);
-			   if (budgetInlineCompile) {
-				  double inlineMs = meshNowMs() - inlineStarted;
-				  this.frameAsyncInline++;
-				  this.frameBudgetRemainingMs -= inlineMs;
-				  net.lax1dude.eaglercraft.v1_8.minecraft.EaglerClientPerf.meshInlineCompile(
-						(long) (inlineMs * 1_000_000.0));
-			   }
                this.executor.execute(this::runTask);
             } catch (NullPointerException e) {
                this.queue.add(task);
             } catch (Exception e) {
                Minecraft.getInstance().delayCrash(CrashReport.forThrowable(e, "Batching sections"));
+			} finally {
+				if (budgetInlineCompile) {
+					this.finishAsyncInlineCompile(inlineStarted);
+				}
             }
          }
       }
    }
+
+	private synchronized boolean reserveAsyncInlineCompile() {
+		if (this.asyncInlineCompileInFlight || this.frameAsyncInline >= this.frameAsyncInlineLimit
+				|| this.frameBudgetRemainingMs <= 0.0) {
+			return false;
+		}
+		this.asyncInlineCompileInFlight = true;
+		this.frameAsyncInline++;
+		return true;
+	}
+
+	private synchronized void finishAsyncInlineCompile(final double started) {
+		double inlineMs = meshNowMs() - started;
+		this.frameBudgetRemainingMs -= inlineMs;
+		this.asyncInlineCompileInFlight = false;
+		net.lax1dude.eaglercraft.v1_8.minecraft.EaglerClientPerf.meshInlineCompile(
+				(long) (inlineMs * 1_000_000.0));
+	}
 
    public void setCameraPosition(final Vec3 cameraPosition) {
       this.cameraPosition.set(cameraPosition);
@@ -329,32 +350,36 @@ public class SectionRenderDispatcher {
 	         gpuCapacityBytes, gpuAllocatedBytes);
 	  this.frameSnapshotLimit = displayActive ? MAX_SNAPSHOTS_PER_FRAME : 12;
 	  this.frameInstallLimit = displayActive ? MAX_INSTALLS_PER_FRAME : 32;
-	  this.frameAsyncInlineLimit = displayActive ? MAX_ASYNC_INLINE_PER_FRAME : 2;
       boolean loadingTerrain = Minecraft.getInstance().gui.screen() instanceof LevelLoadingScreen;
+	  double nextFrameBudgetMs;
 	  if (!displayActive) {
-		 this.frameBudgetRemainingMs = BACKGROUND_MESH_FRAME_BUDGET_MS;
+		 nextFrameBudgetMs = BACKGROUND_MESH_FRAME_BUDGET_MS;
 	  } else if (resumed) {
 		 // The hidden tab accumulated packet/mesh work while Chrome throttled its visual
 		 // callbacks. Spend one bounded catch-up frame instead of treating the long hidden
 		 // interval as a rendering stall and reducing the budget to 1 ms.
-		 this.frameBudgetRemainingMs = RESUME_MESH_FRAME_BUDGET_MS;
+		 nextFrameBudgetMs = RESUME_MESH_FRAME_BUDGET_MS;
       } else if (loadingTerrain) {
-         this.frameBudgetRemainingMs = LOADING_MESH_FRAME_BUDGET_MS;
+         nextFrameBudgetMs = LOADING_MESH_FRAME_BUDGET_MS;
       } else if (previousFrameMs > LONG_FRAME_THRESHOLD_MS) {
-         this.frameBudgetRemainingMs = RECOVERY_MESH_FRAME_BUDGET_MS;
+         nextFrameBudgetMs = RECOVERY_MESH_FRAME_BUDGET_MS;
       } else if (Minecraft.getInstance().gui.screen() != null) {
-         this.frameBudgetRemainingMs = SCREEN_MESH_FRAME_BUDGET_MS;
+         nextFrameBudgetMs = SCREEN_MESH_FRAME_BUDGET_MS;
       } else {
-         this.frameBudgetRemainingMs = MESH_FRAME_BUDGET_MS;
+         nextFrameBudgetMs = MESH_FRAME_BUDGET_MS;
       }
+	  synchronized (this) {
+		 this.frameBudgetRemainingMs = nextFrameBudgetMs;
+		 this.frameAsyncInlineLimit = displayActive ? MAX_ASYNC_INLINE_PER_FRAME : 2;
+		 this.frameAsyncInline = 0;
+	  }
       this.frameSnapshots = 0;
       this.frameInstalls = 0;
-	  this.frameAsyncInline = 0;
       this.snapshotMsThisFrame = 0.0;
       this.installMsThisFrame = 0.0;
       // Budget-deferred dispatch tasks are sitting in the queue without a pending runTask; make
       // sure the pump advances this frame so they are not stranded until the next dirty section.
-      if (!this.closed && MeshWorkerRuntime.isReady() && this.queue.size() > 0) {
+      if (!this.closed && this.queue.size() > 0) {
          this.executor.execute(this::runTask);
       }
    }
@@ -527,6 +552,12 @@ public class SectionRenderDispatcher {
             }
          }
       }
+      long uploadedBytes = this.stagingBuffer.uploadedBytes();
+      long uploadCount = this.stagingBuffer.uploadCount();
+      net.lax1dude.eaglercraft.v1_8.minecraft.EaglerClientPerf.terrainUpload(
+         uploadedBytes - this.lastReportedUploadBytes, uploadCount - this.lastReportedUploadCount);
+      this.lastReportedUploadBytes = uploadedBytes;
+      this.lastReportedUploadCount = uploadCount;
    }
 
    private void schedule(final SectionRenderDispatcher.RenderSection.SectionTask task) {
