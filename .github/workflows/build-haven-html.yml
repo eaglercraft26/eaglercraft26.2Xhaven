@@ -1,0 +1,79 @@
+name: Build X Haven Offline HTML
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    env:
+      EAGLER_BUILD_CAP_MIB: "10240"
+      EAGLER_BUILD_XMX_MIB: "8192"
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Setup Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: microsoft
+          java-version: "25"
+
+      - name: Check available resources
+        run: |
+          java -version
+          node --version
+          nproc
+          free -h
+          df -h /
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build X Haven
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p build-logs
+          node wasm-toolchain/build-single-html.js \
+            --with-music \
+            --fast-package \
+            --output Haven-26.2.html \
+            2>&1 | tee build-logs/build.log
+
+      - name: Verify HTML
+        run: |
+          test -s Haven-26.2.html
+          ls -lh Haven-26.2.html
+
+      - name: Upload standalone HTML
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: X-Haven-26.2-HTML
+          path: Haven-26.2.html
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Upload build log if build fails
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: X-Haven-build-log
+          path: build-logs/build.log
+          if-no-files-found: ignore
+          retention-days: 3
